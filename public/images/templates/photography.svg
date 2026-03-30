@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0f3ff"/>
+      <stop offset="100%" stop-color="#dce3ff"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4F6BF6"/>
+      <stop offset="100%" stop-color="#3B54D4"/>
+    </linearGradient>
+    <linearGradient id="lens" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6B83FF"/>
+      <stop offset="50%" stop-color="#4F6BF6"/>
+      <stop offset="100%" stop-color="#3B54D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="16" fill="url(#bg)"/>
+  <rect x="40" y="40" width="720" height="420" rx="12" fill="white" opacity="0.6"/>
+  <!-- Camera -->
+  <g transform="translate(400, 195)">
+    <ellipse cx="0" cy="65" rx="90" ry="14" fill="#4F6BF6" opacity="0.08"/>
+    <!-- Camera body -->
+    <rect x="-80" y="-40" width="160" height="100" rx="14" fill="url(#accent)"/>
+    <!-- Top bump (viewfinder) -->
+    <rect x="-20" y="-55" width="50" height="20" rx="6" fill="#3B54D4"/>
+    <!-- Flash -->
+    <rect x="-65" y="-52" width="25" height="14" rx="4" fill="#3B54D4"/>
+    <rect x="-60" y="-48" width="15" height="6" rx="2" fill="#FFD966" opacity="0.7"/>
+    <!-- Lens outer -->
+    <circle cx="0" cy="10" r="38" fill="#2d2d3a"/>
+    <circle cx="0" cy="10" r="32" fill="url(#lens)" opacity="0.3"/>
+    <circle cx="0" cy="10" r="26" fill="#1a1a2e"/>
+    <circle cx="0" cy="10" r="20" fill="#2d2d3a"/>
+    <circle cx="0" cy="10" r="14" fill="#3B54D4" opacity="0.4"/>
+    <!-- Lens reflection -->
+    <ellipse cx="-6" cy="4" rx="6" ry="8" fill="white" opacity="0.15" transform="rotate(-20)"/>
+    <!-- Shutter button -->
+    <circle cx="45" cy="-45" r="8" fill="#FF6B6B" opacity="0.8"/>
+    <!-- Mode dial -->
+    <circle cx="-50" cy="-45" r="6" fill="#dce3ff" opacity="0.5"/>
+  </g>
+  <!-- Text -->
+  <text x="400" y="340" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" fill="#1a1a2e">Photography Studio</text>
+  <text x="400" y="370" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#4F6BF6" font-weight="500">Website Template</text>
+</svg>

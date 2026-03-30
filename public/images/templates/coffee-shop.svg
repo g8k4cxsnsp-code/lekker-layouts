@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0f3ff"/>
+      <stop offset="100%" stop-color="#dce3ff"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4F6BF6"/>
+      <stop offset="100%" stop-color="#3B54D4"/>
+    </linearGradient>
+    <linearGradient id="cup" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5A78FF"/>
+      <stop offset="100%" stop-color="#3B54D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="16" fill="url(#bg)"/>
+  <rect x="40" y="40" width="720" height="420" rx="12" fill="white" opacity="0.6"/>
+  <!-- Coffee Cup -->
+  <g transform="translate(400, 200)">
+    <ellipse cx="0" cy="75" rx="70" ry="12" fill="#4F6BF6" opacity="0.08"/>
+    <!-- Saucer -->
+    <ellipse cx="0" cy="68" rx="65" ry="10" fill="#e0e4f0"/>
+    <ellipse cx="0" cy="65" rx="60" ry="8" fill="#eef0f8"/>
+    <!-- Cup body -->
+    <path d="M-40,-20 L-35,60 Q-35,68 0,68 Q35,68 35,60 L40,-20 Z" fill="url(#cup)"/>
+    <!-- Cup rim -->
+    <ellipse cx="0" cy="-20" rx="40" ry="10" fill="#6B83FF"/>
+    <ellipse cx="0" cy="-20" rx="34" ry="7" fill="#3B54D4" opacity="0.3"/>
+    <!-- Coffee surface -->
+    <ellipse cx="0" cy="-18" rx="32" ry="6" fill="#8B6F47" opacity="0.6"/>
+    <!-- Handle -->
+    <path d="M40,0 Q65,0 65,25 Q65,48 40,45" stroke="#4F6BF6" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <!-- Steam -->
+    <path d="M-12,-40 Q-15,-55 -8,-65 Q-2,-75 -5,-90" stroke="#4F6BF6" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.3">
+      <animate attributeName="d" dur="3s" repeatCount="indefinite" values="M-12,-40 Q-15,-55 -8,-65 Q-2,-75 -5,-90;M-12,-40 Q-9,-55 -14,-65 Q-8,-75 -11,-90;M-12,-40 Q-15,-55 -8,-65 Q-2,-75 -5,-90"/>
+    </path>
+    <path d="M0,-38 Q3,-52 -2,-62 Q-6,-72 0,-88" stroke="#4F6BF6" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.25">
+      <animate attributeName="d" dur="2.5s" repeatCount="indefinite" values="M0,-38 Q3,-52 -2,-62 Q-6,-72 0,-88;M0,-38 Q-3,-52 4,-62 Q0,-72 3,-88;M0,-38 Q3,-52 -2,-62 Q-6,-72 0,-88"/>
+    </path>
+    <path d="M12,-40 Q15,-54 10,-64 Q5,-74 10,-88" stroke="#4F6BF6" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.2">
+      <animate attributeName="d" dur="3.5s" repeatCount="indefinite" values="M12,-40 Q15,-54 10,-64 Q5,-74 10,-88;M12,-40 Q9,-54 14,-64 Q10,-74 13,-88;M12,-40 Q15,-54 10,-64 Q5,-74 10,-88"/>
+    </path>
+    <!-- Coffee bean decorative -->
+    <g transform="translate(-85, 40) rotate(-20)">
+      <ellipse cx="0" cy="0" rx="10" ry="14" fill="#4F6BF6" opacity="0.15"/>
+      <line x1="0" y1="-10" x2="0" y2="10" stroke="#4F6BF6" stroke-width="1.5" opacity="0.15"/>
+    </g>
+    <g transform="translate(90, 30) rotate(15)">
+      <ellipse cx="0" cy="0" rx="8" ry="12" fill="#4F6BF6" opacity="0.1"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#4F6BF6" stroke-width="1.5" opacity="0.1"/>
+    </g>
+  </g>
+  <!-- Text -->
+  <text x="400" y="345" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" fill="#1a1a2e">Coffee Shop</text>
+  <text x="400" y="375" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#4F6BF6" font-weight="500">Website Template</text>
+</svg>

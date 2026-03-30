@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" fill="#0F172A"/>
+  <!-- Document -->
+  <rect x="80" y="50" width="240" height="300" rx="12" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+  <!-- Header -->
+  <rect x="110" y="80" width="120" height="14" rx="7" fill="#3B82F6"/>
+  <rect x="110" y="106" width="180" height="8" rx="4" fill="#334155"/>
+  <rect x="110" y="122" width="160" height="8" rx="4" fill="#334155"/>
+  <rect x="110" y="138" width="140" height="8" rx="4" fill="#334155"/>
+  <!-- Divider -->
+  <line x1="110" y1="162" x2="290" y2="162" stroke="#334155" stroke-width="1"/>
+  <!-- Body text -->
+  <rect x="110" y="178" width="100" height="10" rx="5" fill="#3B82F6" opacity="0.6"/>
+  <rect x="110" y="198" width="180" height="6" rx="3" fill="#334155"/>
+  <rect x="110" y="212" width="170" height="6" rx="3" fill="#334155"/>
+  <rect x="110" y="226" width="150" height="6" rx="3" fill="#334155"/>
+  <rect x="110" y="240" width="180" height="6" rx="3" fill="#334155"/>
+  <!-- CTA button -->
+  <rect x="110" y="266" width="100" height="28" rx="14" fill="#3B82F6"/>
+  <rect x="130" y="277" width="60" height="6" rx="3" fill="white"/>
+  <!-- Cursor -->
+  <line x1="170" y1="240" x2="170" y2="250" stroke="#3B82F6" stroke-width="2"/>
+</svg>
