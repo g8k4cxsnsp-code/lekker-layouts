@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
   whatsappNumber: "27725976626",
   whatsappMessage: "Hi! I'd like to learn more about Lekker Layouts.",
   email: "hello@lekkerlayouts.co.za",
-  n8nWebhookBase: "https://broadcasting-custom-acdbentity-instruction.trycloudflare.com/webhook", // Temporary quick tunnel — replace with https://n8n.lekkerlayouts.co.za/webhook once domain is on Cloudflare
+  n8nWebhookBase: "https://ballot-solaris-suppliers-kitchen.trycloudflare.com/webhook", // Temporary quick tunnel — replace with https://n8n.lekkerlayouts.co.za/webhook once domain is on Cloudflare
   social: {
     instagram: "https://instagram.com/lekkerlayouts",
     facebook: "https://facebook.com/lekkerlayouts",
