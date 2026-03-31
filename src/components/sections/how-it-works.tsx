@@ -38,7 +38,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="relative overflow-hidden py-28">
+    <section className="relative overflow-hidden py-20 sm:py-24 lg:py-28">
       <div className="absolute inset-0 -z-10">
         <div className="absolute right-0 top-1/4 h-[400px] w-[400px] rounded-full bg-accent/[0.04] blur-[100px]" />
       </div>

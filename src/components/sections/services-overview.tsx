@@ -43,7 +43,7 @@ const services = [
 
 export function ServicesOverview() {
   return (
-    <section className="bg-muted/30 py-24">
+    <section className="bg-muted/30 py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={staggerContainer}
@@ -84,7 +84,7 @@ export function ServicesOverview() {
               key={service.title}
               variants={fadeInUp}
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className={`relative rounded-xl border p-8 transition-shadow hover:shadow-lg ${
+              className={`relative rounded-xl border p-6 sm:p-8 transition-shadow hover:shadow-lg ${
                 service.highlight
                   ? "border-primary/30 bg-card shadow-sm"
                   : "border-border bg-card"

@@ -14,27 +14,11 @@ const testimonials = [
     rating: 5,
     initials: "FD",
   },
-  {
-    name: "Sarah van der Berg",
-    role: "Photographer, Johannesburg",
-    quote:
-      "I needed a portfolio that showcased my work beautifully. Lekker Layouts delivered exactly that — clean, fast, and my clients love it.",
-    rating: 5,
-    initials: "SV",
-  },
-  {
-    name: "James Naidoo",
-    role: "Financial Advisor, Durban",
-    quote:
-      "As a wealth manager, I needed a site that looked professional and trustworthy. The team understood my needs perfectly. Highly recommend!",
-    rating: 5,
-    initials: "JN",
-  },
 ];
 
 export function Testimonials() {
   return (
-    <section className="relative py-28">
+    <section className="relative py-20 sm:py-24 lg:py-28">
       <div className="absolute inset-0 -z-10">
         <div className="absolute left-0 top-1/3 h-[400px] w-[400px] rounded-full bg-primary/[0.03] blur-[100px]" />
       </div>
@@ -61,8 +45,7 @@ export function Testimonials() {
             variants={fadeInUp}
             className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground"
           >
-            Real businesses, real results. Here&apos;s what our clients have to
-            say about working with us.
+            Real businesses, real results.
           </motion.p>
         </motion.div>
 
@@ -71,14 +54,14 @@ export function Testimonials() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="mt-16 grid gap-8 md:grid-cols-3"
+          className="mt-16 flex justify-center"
         >
           {testimonials.map((testimonial) => (
             <motion.div
               key={testimonial.name}
               variants={fadeInUp}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="card-hover relative rounded-2xl border border-border/60 bg-card p-8"
+              className="card-hover relative w-full max-w-lg rounded-2xl border border-border/60 bg-card p-6 sm:p-8"
             >
               <Quote
                 size={40}

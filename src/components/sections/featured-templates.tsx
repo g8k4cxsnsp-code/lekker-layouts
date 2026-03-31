@@ -14,7 +14,7 @@ export function FeaturedTemplates() {
   const featured = templates.filter((t) => t.isActive).slice(0, 3);
 
   return (
-    <section className="bg-muted/30 py-28">
+    <section className="bg-muted/30 py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={staggerContainer}

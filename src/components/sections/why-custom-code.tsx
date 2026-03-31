@@ -40,7 +40,7 @@ const benefits = [
 
 export function WhyCustomCode() {
   return (
-    <section className="relative py-28">
+    <section className="relative py-20 sm:py-24 lg:py-28">
       <div className="absolute inset-0 -z-10 bg-grid" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -76,14 +76,14 @@ export function WhyCustomCode() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-12 sm:mt-16 grid gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3"
         >
           {benefits.map((benefit) => (
             <motion.div
               key={benefit.title}
               variants={fadeInUp}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="card-hover group rounded-2xl border border-border/60 bg-card p-7"
+              className="card-hover group rounded-2xl border border-border/60 bg-card p-6 sm:p-8"
             >
               <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-lg group-hover:shadow-primary/20">
                 {benefit.icon}

@@ -9,7 +9,7 @@ import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 export function CTASection() {
   return (
-    <section className="relative overflow-hidden bg-foreground py-28 text-background">
+    <section className="relative overflow-hidden bg-foreground py-20 sm:py-24 lg:py-28 text-background">
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-primary/20 blur-[120px]" />
