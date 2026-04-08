@@ -67,7 +67,7 @@ export default function ContactPage() {
 
     try {
       const response = await fetch(
-        `${SITE_CONFIG.n8nWebhookBase}/contact-form`,
+        `${process.env.NEXT_PUBLIC_N8N_WEBHOOK_BASE || "https://n8n.lekkerlayouts.co.za/webhook"}/contact-form`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

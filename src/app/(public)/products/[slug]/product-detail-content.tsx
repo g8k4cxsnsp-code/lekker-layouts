@@ -30,6 +30,7 @@ import {
   MousePointerClick,
   MessageSquare,
   Globe,
+  ShieldCheck,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -99,20 +100,20 @@ const faqs = [
 const howItWorks = [
   {
     step: 1,
-    title: "Purchase",
-    description: "Complete your order through our secure checkout.",
-    icon: ShoppingBag,
+    title: "Tell Us About Your Business",
+    description: "Answer a quick 5-minute questionnaire about your business, audience, and goals.",
+    icon: ClipboardList,
   },
   {
     step: 2,
-    title: "Tell Us About Your Business",
-    description: "Fill out a quick 5-minute questionnaire about your business, audience, and goals.",
-    icon: ClipboardList,
+    title: "Pay Securely",
+    description: "Complete your payment through Yoco's secure checkout. South African cards and instant EFT supported.",
+    icon: ShoppingBag,
   },
   {
     step: 3,
     title: "Receive Your Results",
-    description: "Your personalised deliverables are emailed to you within minutes.",
+    description: "Your personalised deliverables are emailed to you within minutes. No generic templates.",
     icon: Mail,
   },
 ];
@@ -191,7 +192,7 @@ export function ProductDetailContent({ product }: ProductDetailContentProps) {
 
                 <motion.div variants={fadeInUp} className="mt-8 flex flex-wrap gap-4">
                   <Link
-                    href={`/checkout?type=product&slug=${product.slug}`}
+                    href={`/order/${product.slug}`}
                     className={cn(buttonVariants({ size: "lg" }), "gap-2 glow-primary")}
                   >
                     Get Started — R{product.price}
@@ -236,12 +237,13 @@ export function ProductDetailContent({ product }: ProductDetailContentProps) {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-3 gap-6 text-center"
+            className="grid grid-cols-2 gap-6 text-center sm:grid-cols-4"
           >
             {[
               { icon: Sparkles, label: "Expert-Crafted" },
               { icon: Target, label: "Personalised to Your Business" },
               { icon: Zap, label: "Delivered in Minutes" },
+              { icon: ShieldCheck, label: "Free Revisions Guarantee" },
             ].map((item) => (
               <motion.div
                 key={item.label}
@@ -504,7 +506,7 @@ export function ProductDetailContent({ product }: ProductDetailContentProps) {
               className="mt-8 flex flex-wrap items-center justify-center gap-4"
             >
               <Link
-                href={`/checkout?type=product&slug=${product.slug}`}
+                href={`/order/${product.slug}`}
                 className={cn(buttonVariants({ size: "lg" }), "gap-2 glow-primary")}
               >
                 Get Started — R{product.price}

@@ -25,8 +25,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Professional, custom-coded websites for South African businesses.
-              Built with modern technology, designed to convert.
+              The networking hub for South African small business owners.
+              Connect, grow, and get discovered.
             </p>
             <div className="flex items-center gap-3">
               <a
@@ -59,13 +59,13 @@ export function Footer() {
             </div>
           </motion.div>
 
-          {/* Templates */}
+          {/* Platform */}
           <motion.div variants={fadeIn}>
             <h3 className="mb-4 font-heading text-sm font-semibold uppercase tracking-wider text-foreground">
-              Templates
+              Platform
             </h3>
             <motion.ul variants={staggerContainerFast} className="space-y-3">
-              {FOOTER_LINKS.templates.map((link) => (
+              {FOOTER_LINKS.platform.map((link) => (
                 <motion.li key={link.href} variants={fadeInUp}>
                   <Link
                     href={link.href}

@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, Code2, Smartphone } from "lucide-react";
+import { ArrowRight, Users, Briefcase, TrendingUp } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { cn } from "@/lib/utils";
-import { fadeIn, fadeInUp, blurIn, popIn, staggerContainer, float } from "@/lib/animations";
+import { fadeInUp, blurIn, popIn, staggerContainer, float } from "@/lib/animations";
 
 export function HeroSection() {
   return (
@@ -37,14 +37,14 @@ export function HeroSection() {
           animate="visible"
           className="mx-auto max-w-4xl text-center"
         >
-          {/* Headline — blur reveal */}
+          {/* Headline */}
           <motion.h1
             variants={blurIn}
             className="font-heading text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[1.05]"
           >
-            Websites That Work{" "}
+            Where SA Businesses{" "}
             <span className="animate-gradient bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              As Hard As You Do
+              Grow Together
             </span>
           </motion.h1>
 
@@ -53,50 +53,50 @@ export function HeroSection() {
             variants={fadeInUp}
             className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
           >
-            Professional, hand-coded website templates for South African
-            businesses. Lightning fast, SEO optimized, and fully customizable.
-            No WordPress. No page builders. Just clean code.
+            The networking hub for South African small business owners.
+            Connect with other entrepreneurs, share your journey, get discovered,
+            and access tools to grow your brand — all in one place.
           </motion.p>
 
-          {/* CTAs — pop in */}
+          {/* CTAs */}
           <motion.div
             variants={fadeInUp}
             className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
               <Link
-                href="/templates"
+                href="/register"
                 className={cn(
                   buttonVariants({ size: "lg" }),
                   "gap-2 px-8 py-3 text-base font-semibold glow-primary"
                 )}
               >
-                Browse Templates
+                Join Free
                 <ArrowRight size={18} />
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
               <Link
-                href="/pricing"
+                href="/login"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
                   "px-8 py-3 text-base font-semibold"
                 )}
               >
-                View Pricing
+                Log In
               </Link>
             </motion.div>
           </motion.div>
 
-          {/* Stats — scale pop in */}
+          {/* Stats */}
           <motion.div
             variants={popIn}
             className="mx-auto mt-20 grid max-w-2xl grid-cols-3 gap-8 rounded-2xl border border-border/60 bg-card/50 p-8 shadow-sm backdrop-blur-sm"
           >
             {[
-              { icon: <Zap size={22} />, label: "Load time", counter: <><AnimatedCounter prefix="< " target={1} duration={0.8} />s</> },
-              { icon: <Smartphone size={22} />, label: "Mobile responsive", counter: <><AnimatedCounter target={100} suffix="%" duration={1.5} /></> },
-              { icon: <Code2 size={22} />, label: "No WordPress", counter: "Hand-coded" },
+              { icon: <Users size={22} />, label: "Business owners", counter: <>Free to join</> },
+              { icon: <Briefcase size={22} />, label: "Industries", counter: <><AnimatedCounter target={10} duration={1} />+</> },
+              { icon: <TrendingUp size={22} />, label: "Grow your brand", counter: <>100%</> },
             ].map((item, i) => (
               <motion.div
                 key={item.label}

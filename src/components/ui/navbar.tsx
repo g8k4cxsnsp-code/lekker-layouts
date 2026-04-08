@@ -1,27 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn, UserPlus } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { createClient } from "@/lib/supabase/client";
+import type { User, AuthChangeEvent, Session } from "@supabase/supabase-js";
+
+export function LekkerLogo({ className }: { className?: string }) {
+  return (
+    <span className={cn("font-heading text-xl font-bold tracking-tight text-foreground", className)}>
+      Lekker
+      <span className="ml-0.5 border border-primary rounded px-1.5 py-0.5 text-primary">
+        Layouts
+      </span>
+    </span>
+  );
+}
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [user, setUser] = useState<{ id: string } | null>(null);
+  const [loading, setLoading] = useState(true);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const supabase = createClient();
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
+
+    supabase.auth.getUser().then(({ data }: { data: { user: User | null } }) => {
+      setUser(data.user);
+      setLoading(false);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/70 backdrop-blur-xl backdrop-saturate-150">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="font-heading text-xl font-bold tracking-tight text-foreground">
-            Lekker<span className="text-primary">Layouts</span>
-          </span>
+          <LekkerLogo />
         </Link>
 
         {/* Desktop nav */}
@@ -45,7 +79,29 @@ export function Navbar() {
         {/* Desktop actions */}
         <div className="hidden items-center gap-3 lg:flex">
           <ThemeToggle />
-          <Link href="/templates" className={buttonVariants()}>Browse Templates</Link>
+          {!loading && (
+            <>
+              {user ? (
+                <Link href="/feed" className={buttonVariants()}>
+                  Dashboard
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className={cn(buttonVariants({ variant: "ghost" }), "gap-2")}
+                  >
+                    <LogIn size={16} />
+                    Log In
+                  </Link>
+                  <Link href="/register" className={cn(buttonVariants(), "gap-2")}>
+                    <UserPlus size={16} />
+                    Join Free
+                  </Link>
+                </>
+              )}
+            </>
+          )}
         </div>
 
         {/* Mobile menu button */}
@@ -87,8 +143,39 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <div className="pt-2">
-                <Link href="/templates" className={cn(buttonVariants(), "w-full")}>Browse Templates</Link>
+              <div className="space-y-2 pt-2">
+                {!loading && (
+                  <>
+                    {user ? (
+                      <Link
+                        href="/feed"
+                        onClick={() => setMobileOpen(false)}
+                        className={cn(buttonVariants(), "w-full")}
+                      >
+                        Dashboard
+                      </Link>
+                    ) : (
+                      <>
+                        <Link
+                          href="/login"
+                          onClick={() => setMobileOpen(false)}
+                          className={cn(buttonVariants({ variant: "outline" }), "w-full gap-2")}
+                        >
+                          <LogIn size={16} />
+                          Log In
+                        </Link>
+                        <Link
+                          href="/register"
+                          onClick={() => setMobileOpen(false)}
+                          className={cn(buttonVariants(), "w-full gap-2")}
+                        >
+                          <UserPlus size={16} />
+                          Join Free
+                        </Link>
+                      </>
+                    )}
+                  </>
+                )}
               </div>
             </div>
           </motion.div>

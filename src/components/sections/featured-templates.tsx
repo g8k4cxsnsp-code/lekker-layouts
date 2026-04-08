@@ -25,21 +25,21 @@ export function FeaturedTemplates() {
         >
           <motion.div variants={fadeIn}>
             <Badge variant="outline" className="mb-4">
-              Featured Templates
+              Business Tools
             </Badge>
           </motion.div>
           <motion.h2
             variants={fadeInUp}
             className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
           >
-            Ready-to-Launch Website Templates
+            Launch Your Online Presence
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground"
           >
-            Custom-coded in React & Next.js. Pick a template, we brand it for
-            your business, and you&apos;re live in days.
+            Need a website? Browse our ready-made templates — pick one, we
+            personalise it to your brand, and you&apos;re live in days.
           </motion.p>
         </motion.div>
 
@@ -132,7 +132,7 @@ export function FeaturedTemplates() {
               "gap-2 px-8"
             )}
           >
-            View All Templates
+            Browse All Templates
             <ArrowRight size={18} />
           </Link>
         </motion.div>

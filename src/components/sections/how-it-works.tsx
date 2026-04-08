@@ -1,38 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MousePointerClick, MessageSquare, Paintbrush, Rocket } from "lucide-react";
+import { UserPlus, Briefcase, Users, Rocket } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { fadeIn, fadeInUp, scaleIn, staggerContainer } from "@/lib/animations";
 
 const steps = [
   {
-    icon: <MousePointerClick size={28} />,
+    icon: <UserPlus size={28} />,
     step: "1",
-    title: "Choose a Template",
+    title: "Create Your Account",
     description:
-      "Browse our collection of custom-coded templates and pick the one that fits your industry.",
+      "Sign up for free in under a minute. No credit card required.",
   },
   {
-    icon: <MessageSquare size={28} />,
+    icon: <Briefcase size={28} />,
     step: "2",
-    title: "Tell Us About Your Business",
+    title: "Build Your Profile",
     description:
-      "Share your logo, brand colors, content, and photos. We handle the rest.",
+      "Tell us about your business — industry, services, what makes you unique. This is your digital shopfront.",
   },
   {
-    icon: <Paintbrush size={28} />,
+    icon: <Users size={28} />,
     step: "3",
-    title: "We Brand Everything",
+    title: "Connect & Share",
     description:
-      "Our team customizes the template with your branding, content, and imagery.",
+      "Find other SA business owners, send connection requests, post updates, and share deals.",
   },
   {
     icon: <Rocket size={28} />,
     step: "4",
-    title: "Launch in Days",
+    title: "Grow Your Brand",
     description:
-      "Your brand new, lightning-fast website goes live. You review, we refine, done.",
+      "Get discovered by other entrepreneurs and customers. Go Premium for boosted visibility.",
   },
 ];
 
@@ -52,7 +52,7 @@ export function HowItWorks() {
         >
           <motion.div variants={fadeIn}>
             <Badge variant="outline" className="mb-4">
-              Simple Process
+              Getting Started
             </Badge>
           </motion.div>
           <motion.h2
@@ -65,8 +65,8 @@ export function HowItWorks() {
             variants={fadeInUp}
             className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground"
           >
-            From template selection to launch in four simple steps. No
-            complicated processes, no endless back-and-forth.
+            From sign-up to growing your network in four simple steps.
+            No complicated setup, no fees to get started.
           </motion.p>
         </motion.div>
 
@@ -83,7 +83,6 @@ export function HowItWorks() {
               variants={fadeInUp}
               className="relative text-center"
             >
-              {/* Connector line — draws in */}
               {i < steps.length - 1 && (
                 <motion.div
                   initial={{ scaleX: 0 }}

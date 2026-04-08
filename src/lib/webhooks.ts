@@ -15,7 +15,7 @@ export async function submitQuestionnaire(
 ): Promise<{ success: boolean; message?: string }> {
   try {
     const response = await fetch(
-      `${SITE_CONFIG.n8nWebhookBase}/${data.productSlug}`,
+      `${process.env.N8N_WEBHOOK_BASE || "https://n8n.lekkerlayouts.co.za/webhook"}/${data.productSlug}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

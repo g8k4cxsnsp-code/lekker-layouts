@@ -133,7 +133,7 @@ export default function ProductsPage() {
 
                     <div className="mt-4 flex flex-col gap-2">
                       <Link
-                        href={`/checkout?type=product&slug=${product.slug}`}
+                        href={`/order/${product.slug}`}
                         className={cn(buttonVariants(), "w-full gap-2")}
                       >
                         Get Started — R{product.price}

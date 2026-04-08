@@ -1,0 +1,26 @@
+; Website
+lekkerlayouts.co.za. 14400 IN A 76.76.21.21
+www.lekkerlayouts.co.za. 14400 IN CNAME cname.vercel-dns.com.
+
+; Mail
+mail.lekkerlayouts.co.za. 14400 IN A 156.38.135.50
+lekkerlayouts.co.za. 14400 IN MX 0 mail.lekkerlayouts.co.za.
+
+; Email services
+webmail.lekkerlayouts.co.za. 14400 IN A 156.38.135.50
+autodiscover.lekkerlayouts.co.za. 14400 IN A 156.38.135.50
+autoconfig.lekkerlayouts.co.za. 14400 IN A 156.38.135.50
+cpanel.lekkerlayouts.co.za. 14400 IN A 156.38.135.50
+ftp.lekkerlayouts.co.za. 14400 IN A 156.38.135.50
+whm.lekkerlayouts.co.za. 14400 IN A 156.38.135.50
+cpcontacts.lekkerlayouts.co.za. 14400 IN A 156.38.135.50
+cpcalendars.lekkerlayouts.co.za. 14400 IN A 156.38.135.50
+webdisk.lekkerlayouts.co.za. 14400 IN A 156.38.135.50
+
+; TXT records
+lekkerlayouts.co.za. 14400 IN TXT "v=spf1 +a +mx +ip4:156.38.135.50 ~all"
+_dmarc.lekkerlayouts.co.za. 14400 IN TXT "v=DMARC1; p=none;"
+default._domainkey.lekkerlayouts.co.za. 14400 IN TXT "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmreS+PSg3rF7nKadJfVUG4BPyZ5mnG4T0EPMZexZnFc/iXgQTCi0n1GKNMrctb6UfgfbPw0yolUbp0W1RPQcA4qQkXuHKzd8WYGyWeBw0xXFwbogunpJh8/TOilLf/b0ufWER5ooOnbBWEpS4mDVpC6JgSen8XHFlCf28Xk0J6w9P0nystoOE++rnccWgNug3HojJXji/hWp8GxbvGwL4vxeJ7B+ZTKS44UbCWyYP0JKmn4vhmYcBz607gNZ9wHR7kBo80msJ6PZ1hoYGcTFoCOJRXHUFSPMD7xCOgkNIOB+vU+PZj7Gw4vuTYqQqK4O64WGpfLG2RWvgLn2dcz3iwIDAQAB;"
+
+; SRV
+_autodiscover._tcp.lekkerlayouts.co.za. 14400 IN SRV 0 0 443 cpanelemaildiscovery.cpanel.net.

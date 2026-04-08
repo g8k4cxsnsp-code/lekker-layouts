@@ -18,34 +18,34 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Lekker Layouts | Custom-Coded Websites for South African Businesses",
+    default: "Lekker Layouts | The Networking Hub for SA Business Owners",
     template: "%s | Lekker Layouts",
   },
   description:
-    "Professional, hand-coded website templates built with modern technology. Lightning fast, SEO optimized, and fully customizable. Proudly South African.",
+    "The networking hub for South African small business owners. Connect with entrepreneurs, grow your brand, and access digital tools to take your business further.",
   keywords: [
-    "web design South Africa",
-    "website templates",
-    "custom websites",
-    "Next.js templates",
-    "web development Cape Town",
-    "South African web agency",
-    "affordable websites SA",
+    "South African business network",
+    "small business South Africa",
+    "entrepreneur networking SA",
+    "business community platform",
+    "SA startup hub",
+    "connect business owners",
+    "grow your business South Africa",
   ],
   authors: [{ name: "Lekker Layouts" }],
   openGraph: {
     type: "website",
     locale: "en_ZA",
     siteName: "Lekker Layouts",
-    title: "Lekker Layouts | Custom-Coded Websites for South African Businesses",
+    title: "Lekker Layouts | Where SA Businesses Grow Together",
     description:
-      "Professional, hand-coded website templates built with modern technology. From R3,500.",
+      "The networking hub for South African small business owners. Connect, grow, and get discovered.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Lekker Layouts",
     description:
-      "Custom-coded websites for South African businesses. Fast, beautiful, affordable.",
+      "The networking hub for South African small business owners. Connect, grow, and get discovered.",
   },
   robots: {
     index: true,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, redirect } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, CreditCard, Lock, ShieldCheck } from "lucide-react";
@@ -20,16 +20,21 @@ function CheckoutForm() {
   const type = searchParams.get("type"); // "product" or "template"
   const slug = searchParams.get("slug");
 
+  // Redirect product checkouts to the new /order flow
+  if (type === "product" && slug) {
+    router.replace(`/order/${slug}`);
+    return null;
+  }
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [processing, setProcessing] = useState(false);
 
-  // Find the item
-  const product = type === "product" ? products.find((p) => p.slug === slug) : null;
+  // Only templates use this checkout now
   const template = type === "template" ? templates.find((t) => t.slug === slug) : null;
-  const item = product || template;
+  const item = template;
 
-  if (!item || !type) {
+  if (!item || type !== "template") {
     return (
       <div className="py-32 text-center">
         <h1 className="font-heading text-2xl font-bold">Item not found</h1>
@@ -41,10 +46,9 @@ function CheckoutForm() {
     );
   }
 
-  const isTemplate = type === "template";
   const fullPrice = item.price;
-  const chargeAmount = isTemplate ? Math.round(fullPrice / 2) : fullPrice;
-  const remainingBalance = isTemplate ? fullPrice - chargeAmount : 0;
+  const chargeAmount = Math.round(fullPrice / 2);
+  const remainingBalance = fullPrice - chargeAmount;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,10 +56,10 @@ function CheckoutForm() {
 
     setProcessing(true);
 
-    // Simulate payment processing
+    // Simulate payment processing for templates (TODO: integrate Yoco for templates too)
     setTimeout(() => {
       const params = new URLSearchParams({
-        type,
+        type: "template",
         slug: slug!,
         email,
         name,
@@ -73,7 +77,7 @@ function CheckoutForm() {
     >
       <motion.div variants={fadeIn}>
         <Link
-          href={isTemplate ? `/templates/${slug}` : `/products/${slug}`}
+          href={`/templates/${slug}`}
           className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft size={16} />
@@ -85,11 +89,9 @@ function CheckoutForm() {
         <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground">
           Checkout
         </h1>
-        {isTemplate && (
-          <Badge variant="outline" className="mt-2">
-            50% Deposit
-          </Badge>
-        )}
+        <Badge variant="outline" className="mt-2">
+          50% Deposit
+        </Badge>
       </motion.div>
 
       {/* Order Summary */}
@@ -104,23 +106,19 @@ function CheckoutForm() {
           <div>
             <p className="font-heading font-semibold text-foreground">{item.name}</p>
             <p className="text-sm text-muted-foreground">
-              {isTemplate ? `${(template as typeof templates[0]).tier === "premium" ? "Premium" : "Starter"} Template` : (product as typeof products[0]).category}
+              {(template as typeof templates[0]).tier === "premium" ? "Premium" : "Starter"} Template
             </p>
           </div>
           <div className="text-right">
-            {isTemplate && (
-              <p className="text-sm text-muted-foreground line-through">
-                R{fullPrice.toLocaleString()}
-              </p>
-            )}
+            <p className="text-sm text-muted-foreground line-through">
+              R{fullPrice.toLocaleString()}
+            </p>
             <p className="font-heading text-2xl font-bold text-foreground">
               R{chargeAmount.toLocaleString()}
             </p>
-            {isTemplate && (
-              <p className="text-xs text-muted-foreground">
-                50% deposit — R{remainingBalance.toLocaleString()} due on delivery
-              </p>
-            )}
+            <p className="text-xs text-muted-foreground">
+              50% deposit — R{remainingBalance.toLocaleString()} due on delivery
+            </p>
           </div>
         </div>
       </motion.div>
@@ -246,16 +244,13 @@ function CheckoutForm() {
             </>
           ) : (
             <>
-              Pay R{chargeAmount.toLocaleString()}
-              {isTemplate && " (50% Deposit)"}
+              Pay R{chargeAmount.toLocaleString()} (50% Deposit)
             </>
           )}
         </button>
 
         <p className="text-center text-xs text-muted-foreground">
-          {isTemplate
-            ? "You're paying a 50% deposit. The remaining balance is due on delivery of your branded website."
-            : "After payment, you'll answer a few questions about your business. Your personalised results will be emailed within minutes."}
+          You&apos;re paying a 50% deposit. The remaining balance is due on delivery of your branded website.
         </p>
       </motion.form>
     </motion.div>

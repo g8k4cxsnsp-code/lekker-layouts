@@ -2,11 +2,10 @@ export const SITE_CONFIG = {
   name: "Lekker Layouts",
   url: "https://lekkerlayouts.co.za",
   description:
-    "Professional, hand-coded website templates built with modern technology. Proudly South African.",
+    "The networking hub for South African small business owners. Connect, grow, and get discovered.",
   whatsappNumber: "27725976626",
   whatsappMessage: "Hi! I'd like to learn more about Lekker Layouts.",
-  email: "hello@lekkerlayouts.co.za",
-  n8nWebhookBase: "https://n8n.lekkerlayouts.co.za/webhook",
+  email: "info@lekkerlayouts.co.za",
   social: {
     instagram: "https://instagram.com/lekkerlayouts",
     facebook: "https://facebook.com/lekkerlayouts",
@@ -16,24 +15,29 @@ export const SITE_CONFIG = {
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Templates", href: "/templates" },
   { label: "Products", href: "/products" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Services", href: "/services" },
+  { label: "Templates", href: "/templates" },
   { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
+export const APP_NAV_LINKS = [
+  { label: "Feed", href: "/feed", icon: "Newspaper" },
+  { label: "Discover", href: "/discover", icon: "Search" },
+  { label: "Messages", href: "/messages", icon: "MessageCircle" },
+  { label: "Products", href: "/products", icon: "ShoppingBag" },
+  { label: "Premium", href: "/premium", icon: "Crown" },
+] as const;
+
 export const FOOTER_LINKS = {
-  templates: [
-    { label: "Browse Templates", href: "/templates" },
+  platform: [
+    { label: "Join Free", href: "/register" },
+    { label: "Log In", href: "/login" },
     { label: "Digital Products", href: "/products" },
-    { label: "Pricing", href: "/pricing" },
+    { label: "Browse Templates", href: "/templates" },
   ],
   company: [
     { label: "About Us", href: "/about" },
-    { label: "Services", href: "/services" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ],
