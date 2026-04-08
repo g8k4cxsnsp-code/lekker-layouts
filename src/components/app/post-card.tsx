@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 import { addComment } from "@/lib/actions/posts";
+import { UserAvatar } from "@/components/app/user-avatar";
 
 interface PostCardProps {
   post: any;
@@ -96,11 +97,12 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
       <div className="p-4">
         {/* Header */}
         <div className="flex items-start gap-3">
-          <Link
-            href={`/profile/${profile?.username || profile?.id}`}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary"
-          >
-            {profile?.business_name?.[0] || profile?.full_name?.[0] || "?"}
+          <Link href={`/profile/${profile?.username || profile?.id}`}>
+            <UserAvatar
+              src={profile?.logo_url}
+              name={profile?.business_name || profile?.full_name}
+              size="sm"
+            />
           </Link>
 
           <div className="min-w-0 flex-1">
@@ -193,13 +195,12 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
                 <div className="mb-3 space-y-3">
                   {comments.map((comment) => (
                     <div key={comment.id} className="flex gap-2">
-                      <Link
-                        href={`/profile/${comment.profiles?.username || comment.profiles?.id || comment.user_id}`}
-                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary"
-                      >
-                        {comment.profiles?.business_name?.[0] ||
-                          comment.profiles?.full_name?.[0] ||
-                          "?"}
+                      <Link href={`/profile/${comment.profiles?.username || comment.profiles?.id || comment.user_id}`}>
+                        <UserAvatar
+                          src={comment.profiles?.logo_url}
+                          name={comment.profiles?.business_name || comment.profiles?.full_name}
+                          size="xs"
+                        />
                       </Link>
                       <div className="min-w-0 flex-1 rounded-lg bg-card px-3 py-2">
                         <Link

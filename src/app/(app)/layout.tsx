@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { AppShell } from "@/components/app/app-shell";
 
@@ -23,11 +24,13 @@ export default async function AppLayout({
     .eq("id", user.id)
     .single();
 
-  // If no profile or not completed, redirect to setup
-  // (except if already on setup page)
+  // If no profile or not completed, redirect to setup (except if already on setup page)
   if (!profile?.profile_completed) {
-    // We can't check the pathname server-side easily,
-    // so the setup page itself won't call this redirect
+    const headerList = await headers();
+    const pathname = headerList.get("x-pathname") || "";
+    if (!pathname.startsWith("/profile/setup")) {
+      redirect("/profile/setup");
+    }
   }
 
   return (

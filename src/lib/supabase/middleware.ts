@@ -31,9 +31,13 @@ export async function updateSession(request: NextRequest) {
   );
 
   // Refresh the session — this is the main purpose of the middleware
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user = null;
+  try {
+    const { data } = await supabase.auth.getUser();
+    user = data.user;
+  } catch {
+    // If Supabase is unreachable, continue without user — pages will handle auth
+  }
 
   const pathname = request.nextUrl.pathname;
 
@@ -68,6 +72,9 @@ export async function updateSession(request: NextRequest) {
     url.pathname = "/feed";
     return NextResponse.redirect(url);
   }
+
+  // Pass pathname to server components via header
+  supabaseResponse.headers.set("x-pathname", pathname);
 
   return supabaseResponse;
 }

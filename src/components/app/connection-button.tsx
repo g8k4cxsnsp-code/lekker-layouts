@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UserPlus, UserCheck, Clock, Loader2 } from "lucide-react";
+import { UserPlus, UserCheck, Clock, Loader2, AlertCircle } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
@@ -17,6 +17,7 @@ export function ConnectionButton({
 }: ConnectionButtonProps) {
   const [status, setStatus] = useState(initialStatus);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleConnect = async () => {
     if (status !== "none") return;
@@ -29,14 +30,17 @@ export function ConnectionButton({
 
     if (!user) return;
 
-    const { error } = await supabase.from("connections").insert({
+    const { error: insertError } = await supabase.from("connections").insert({
       requester_id: user.id,
       receiver_id: profileId,
       status: "pending",
     });
 
-    if (!error) {
+    if (!insertError) {
       setStatus("pending");
+    } else {
+      setError(true);
+      setTimeout(() => setError(false), 3000);
     }
     setLoading(false);
   };
@@ -72,17 +76,22 @@ export function ConnectionButton({
   }
 
   return (
-    <button
-      onClick={handleConnect}
-      disabled={loading}
-      className={cn(buttonVariants(), "gap-2")}
-    >
-      {loading ? (
-        <Loader2 size={14} className="animate-spin" />
-      ) : (
-        <UserPlus size={14} />
+    <div className="flex flex-col items-end gap-1">
+      <button
+        onClick={handleConnect}
+        disabled={loading}
+        className={cn(buttonVariants(), "gap-2")}
+      >
+        {loading ? (
+          <Loader2 size={14} className="animate-spin" />
+        ) : (
+          <UserPlus size={14} />
+        )}
+        {loading ? "Connecting..." : "Connect"}
+      </button>
+      {error && (
+        <span className="text-xs text-destructive">Failed to connect</span>
       )}
-      Connect
-    </button>
+    </div>
   );
 }

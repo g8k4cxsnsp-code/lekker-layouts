@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, ImagePlus, Megaphone, Tag, MessageSquare } from "lucide-react";
+import { Send, Megaphone, Tag, MessageSquare, Loader2, AlertCircle } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -24,14 +24,16 @@ export function PostComposer({ onPost, userProfile }: PostComposerProps) {
   const [content, setContent] = useState("");
   const [postType, setPostType] = useState<PostType>("update");
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async () => {
     if (!content.trim() || submitting) return;
 
     setSubmitting(true);
+    setError("");
     const supabase = createClient();
 
-    const { data, error } = await supabase
+    const { data, error: postError } = await supabase
       .from("posts")
       .insert({
         content: content.trim(),
@@ -41,10 +43,12 @@ export function PostComposer({ onPost, userProfile }: PostComposerProps) {
       .select()
       .single();
 
-    if (!error && data) {
+    if (!postError && data) {
       onPost(data);
       setContent("");
       setPostType("update");
+    } else {
+      setError("Failed to post. Please try again.");
     }
 
     setSubmitting(false);
@@ -66,6 +70,13 @@ export function PostComposer({ onPost, userProfile }: PostComposerProps) {
         className="w-full resize-none bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
         maxLength={1000}
       />
+
+      {error && (
+        <div className="mt-2 flex items-center gap-2 text-xs text-destructive">
+          <AlertCircle size={12} />
+          {error}
+        </div>
+      )}
 
       <div className="mt-3 flex items-center justify-between">
         {/* Post type selector */}
@@ -98,8 +109,12 @@ export function PostComposer({ onPost, userProfile }: PostComposerProps) {
             (!content.trim() || submitting) && "opacity-50 cursor-not-allowed"
           )}
         >
-          <Send size={14} />
-          Post
+          {submitting ? (
+            <Loader2 size={14} className="animate-spin" />
+          ) : (
+            <Send size={14} />
+          )}
+          {submitting ? "Posting..." : "Post"}
         </button>
       </div>
     </div>

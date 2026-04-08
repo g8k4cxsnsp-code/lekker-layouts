@@ -13,6 +13,7 @@ import {
   Pencil,
   MessageCircle,
   Link2,
+  Loader2,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -21,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { PostCard } from "@/components/app/post-card";
 import { ConnectionButton } from "@/components/app/connection-button";
+import { UserAvatar } from "@/components/app/user-avatar";
 import { createDirectConversation } from "@/lib/actions/messages";
 
 interface ProfileContentProps {
@@ -67,9 +69,11 @@ export function ProfileContent({
         >
           <div className="flex items-start gap-4">
             {/* Avatar */}
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-primary/10 text-2xl font-bold text-primary sm:h-20 sm:w-20">
-              {profile.business_name?.[0] || profile.full_name?.[0] || "?"}
-            </div>
+            <UserAvatar
+              src={profile.logo_url}
+              name={profile.business_name || profile.full_name}
+              size="lg"
+            />
 
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
@@ -149,7 +153,11 @@ export function ProfileContent({
                       "gap-2"
                     )}
                   >
-                    <MessageCircle size={14} />
+                    {messagingLoading ? (
+                      <Loader2 size={14} className="animate-spin" />
+                    ) : (
+                      <MessageCircle size={14} />
+                    )}
                     {messagingLoading ? "Opening..." : "Message"}
                   </button>
                 )}

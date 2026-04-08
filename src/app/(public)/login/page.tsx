@@ -23,7 +23,10 @@ export default function LoginPage() {
 function LoginContent() {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "";
-  const [error, setError] = useState("");
+  const authError = searchParams.get("error");
+  const [error, setError] = useState(
+    authError === "auth" ? "Email confirmation failed or link expired. Please try again." : ""
+  );
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { UserAvatar } from "@/components/app/user-avatar";
 
 interface DiscoverContentProps {
   profiles: any[];
@@ -103,9 +104,11 @@ export function DiscoverContent({ profiles }: DiscoverContentProps) {
                 className="block rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-md"
               >
                 <div className="flex items-start gap-3">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary">
-                    {profile.business_name?.[0] || profile.full_name?.[0] || "?"}
-                  </div>
+                  <UserAvatar
+                    src={profile.logo_url}
+                    name={profile.business_name || profile.full_name}
+                    size="md"
+                  />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       <h3 className="font-heading text-sm font-semibold text-foreground truncate">

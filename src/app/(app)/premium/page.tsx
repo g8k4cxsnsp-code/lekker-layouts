@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Crown,
@@ -48,7 +48,7 @@ export default function PremiumPage() {
   const [isPremium, setIsPremium] = useState(false);
 
   // Check premium status on mount
-  useState(() => {
+  useEffect(() => {
     const check = async () => {
       const supabase = createClient();
       const {
@@ -67,7 +67,7 @@ export default function PremiumPage() {
       }
     };
     check();
-  });
+  }, []);
 
   const handleSubscribe = async () => {
     setLoading(true);

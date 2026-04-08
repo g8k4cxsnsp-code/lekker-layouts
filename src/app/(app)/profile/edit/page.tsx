@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowLeft, Save, Loader2 } from "lucide-react";
+import { ArrowLeft, Save, Loader2, Camera } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { fadeInUp } from "@/lib/animations";
 import { QuestionnaireSection } from "@/components/questionnaire/questionnaire-section";
 import { createClient } from "@/lib/supabase/client";
+import { UserAvatar } from "@/components/app/user-avatar";
 import type { QuestionnaireSection as SectionType } from "@/data/products";
 
 const editSections: SectionType[] = [
@@ -161,6 +162,9 @@ export default function ProfileEditPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -176,7 +180,9 @@ export default function ProfileEditPage() {
         .eq("id", user.id)
         .single();
 
+      setUserId(user.id);
       if (profile) {
+        setAvatarUrl(profile.logo_url || null);
         setValues({
           business_name: profile.business_name || "",
           industry: profile.industry || "",
@@ -262,7 +268,7 @@ export default function ProfileEditPage() {
       <motion.div variants={fadeInUp} initial="hidden" animate="visible">
         <div className="flex items-center gap-3 mb-6">
           <Link
-            href={`/profile/${values.username || ""}`}
+            href="/profile"
             className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted"
           >
             <ArrowLeft size={20} />
@@ -270,6 +276,87 @@ export default function ProfileEditPage() {
           <h1 className="font-heading text-2xl font-bold text-foreground">
             Edit Profile
           </h1>
+        </div>
+
+        {/* Avatar upload */}
+        <div className="mb-6 rounded-xl border border-border bg-card p-6">
+          <h3 className="font-heading text-sm font-semibold text-foreground mb-4">
+            Profile Picture
+          </h3>
+          <div className="flex items-center gap-4">
+            <UserAvatar
+              src={avatarUrl}
+              name={(values.business_name as string) || (values.full_name as string)}
+              size="lg"
+            />
+            <div>
+              <label
+                htmlFor="avatar-upload"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "sm" }),
+                  "gap-2 cursor-pointer",
+                  uploadingAvatar && "opacity-70 cursor-not-allowed"
+                )}
+              >
+                {uploadingAvatar ? (
+                  <>
+                    <Loader2 size={14} className="animate-spin" />
+                    Uploading...
+                  </>
+                ) : (
+                  <>
+                    <Camera size={14} />
+                    Change Photo
+                  </>
+                )}
+              </label>
+              <input
+                id="avatar-upload"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                className="hidden"
+                disabled={uploadingAvatar}
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (!file || !userId) return;
+                  setUploadingAvatar(true);
+                  setMessage("");
+
+                  const supabase = createClient();
+                  const ext = file.name.split(".").pop() || "jpg";
+                  const path = `${userId}/avatar.${ext}`;
+
+                  const { error: uploadError } = await supabase.storage
+                    .from("avatars")
+                    .upload(path, file, { upsert: true });
+
+                  if (uploadError) {
+                    setMessage("Failed to upload photo. Try a smaller image (max 2MB).");
+                    setUploadingAvatar(false);
+                    return;
+                  }
+
+                  const { data: urlData } = supabase.storage
+                    .from("avatars")
+                    .getPublicUrl(path);
+
+                  const publicUrl = `${urlData.publicUrl}?t=${Date.now()}`;
+
+                  await supabase
+                    .from("profiles")
+                    .update({ logo_url: publicUrl })
+                    .eq("id", userId);
+
+                  setAvatarUrl(publicUrl);
+                  setUploadingAvatar(false);
+                  setMessage("Photo updated!");
+                }}
+              />
+              <p className="mt-2 text-xs text-muted-foreground">
+                JPG, PNG or WebP. Max 2MB.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="space-y-6">

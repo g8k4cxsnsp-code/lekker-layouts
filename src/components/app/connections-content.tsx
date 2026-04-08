@@ -26,6 +26,7 @@ import {
   removeConnection,
 } from "@/lib/actions/connections";
 import { createDirectConversation } from "@/lib/actions/messages";
+import { UserAvatar } from "@/components/app/user-avatar";
 
 interface ConnectionsContentProps {
   pendingReceived: any[];
@@ -291,11 +292,12 @@ function PersonCard({
         loading && "opacity-60"
       )}
     >
-      <Link
-        href={`/profile/${profile.username || profile.id}`}
-        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary"
-      >
-        {profile.business_name?.[0] || profile.full_name?.[0] || "?"}
+      <Link href={`/profile/${profile.username || profile.id}`}>
+        <UserAvatar
+          src={profile.logo_url}
+          name={profile.business_name || profile.full_name}
+          size="md"
+        />
       </Link>
 
       <div className="min-w-0 flex-1">

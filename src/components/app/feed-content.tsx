@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { PostComposer } from "./post-composer";
 import { PostCard } from "./post-card";
+import { UserAvatar } from "./user-avatar";
 
 interface FeedContentProps {
   posts: any[];
@@ -95,11 +96,11 @@ export function FeedContent({
                 href="/profile"
                 className="flex items-center gap-3 group"
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary">
-                  {profile?.business_name?.[0] ||
-                    profile?.full_name?.[0] ||
-                    "?"}
-                </div>
+                <UserAvatar
+                  src={profile?.logo_url}
+                  name={profile?.business_name || profile?.full_name}
+                  size="md"
+                />
                 <div className="min-w-0">
                   <p className="font-heading text-sm font-semibold text-foreground group-hover:underline truncate">
                     {profile?.business_name || profile?.full_name}
@@ -138,9 +139,11 @@ export function FeedContent({
                       href={`/profile/${p.username || p.id}`}
                       className="flex items-center gap-2.5 group"
                     >
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                        {p.business_name?.[0] || p.full_name?.[0] || "?"}
-                      </div>
+                      <UserAvatar
+                        src={p.logo_url}
+                        name={p.business_name || p.full_name}
+                        size="xs"
+                      />
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-1">
                           <p className="text-xs font-semibold text-foreground group-hover:underline truncate">
