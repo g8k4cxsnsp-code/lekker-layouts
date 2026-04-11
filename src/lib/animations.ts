@@ -107,29 +107,12 @@ export const popIn: Variants = {
   },
 };
 
-// Float animation for decorative elements
+// Float animation for decorative elements (single play, no infinite loop)
 export const float: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
-    y: [0, -10, 0],
-    transition: {
-      y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-      opacity: { duration: 0.5 },
-    },
-  },
-};
-
-// Pulse glow animation
-export const pulseGlow: Variants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: {
-    opacity: [0.5, 1, 0.5],
-    scale: [0.95, 1, 0.95],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
   },
 };

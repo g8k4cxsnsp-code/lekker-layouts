@@ -26,13 +26,14 @@ export default async function NotificationsPage() {
     .order("created_at", { ascending: false })
     .limit(50);
 
-  // Mark all as read
+  // Mark all as read (fire-and-forget, don't block page render)
   if (notifications && notifications.some((n: any) => !n.read)) {
-    await supabase
+    supabase
       .from("notifications")
       .update({ read: true })
       .eq("user_id", user.id)
-      .eq("read", false);
+      .eq("read", false)
+      .then(() => {});
   }
 
   return (

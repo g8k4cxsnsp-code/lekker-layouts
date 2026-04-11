@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, LogIn, UserPlus, UserCircle, LayoutDashboard, Settings, LogOut } from "lucide-react";
@@ -30,8 +31,12 @@ export function Navbar() {
   const [profile, setProfile] = useState<{ logo_url?: string; full_name?: string; business_name?: string } | null>(null);
   const [loading, setLoading] = useState(true);
   const pathname = usePathname();
+  const fetchedRef = useRef(false);
 
   useEffect(() => {
+    if (fetchedRef.current) return;
+    fetchedRef.current = true;
+
     const supabase = createClient();
     if (!supabase) {
       setLoading(false);
@@ -109,9 +114,11 @@ export function Navbar() {
                     className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-muted"
                   >
                     {profile?.logo_url ? (
-                      <img
+                      <Image
                         src={profile.logo_url}
                         alt="Profile"
+                        width={32}
+                        height={32}
                         className="h-8 w-8 rounded-full object-cover"
                       />
                     ) : (
@@ -192,9 +199,11 @@ export function Navbar() {
               className="rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
             >
               {profile?.logo_url ? (
-                <img
+                <Image
                   src={profile.logo_url}
                   alt="Profile"
+                  width={24}
+                  height={24}
                   className="h-6 w-6 rounded-full object-cover"
                 />
               ) : (

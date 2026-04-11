@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Bell, Search, LogOut, UserCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
@@ -43,9 +44,11 @@ export function AppNavbar({ userName, userAvatar }: AppNavbarProps) {
           title="My Profile"
         >
           {userAvatar ? (
-            <img
+            <Image
               src={userAvatar}
               alt={userName || "Profile"}
+              width={28}
+              height={28}
               className="h-7 w-7 rounded-full object-cover"
             />
           ) : (

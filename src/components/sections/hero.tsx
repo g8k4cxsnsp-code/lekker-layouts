@@ -5,27 +5,16 @@ import { motion } from "framer-motion";
 import { ArrowRight, Users, Briefcase, Zap, Shield } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp, blurIn, popIn, staggerContainer, float } from "@/lib/animations";
+import { fadeInUp, blurIn, popIn, staggerContainer } from "@/lib/animations";
 
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-grid">
-      {/* Background effects */}
+      {/* Background effects — static, no animations */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-background" />
-        <motion.div
-          variants={float}
-          initial="hidden"
-          animate="visible"
-          className="absolute -top-40 right-0 h-[600px] w-[600px] rounded-full bg-primary/[0.07] blur-[100px]"
-        />
-        <motion.div
-          variants={float}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 1 }}
-          className="absolute -bottom-40 -left-20 h-[500px] w-[500px] rounded-full bg-accent/[0.07] blur-[100px]"
-        />
+        <div className="absolute -top-40 right-0 h-[600px] w-[600px] rounded-full bg-primary/[0.07] blur-[100px]" />
+        <div className="absolute -bottom-40 -left-20 h-[500px] w-[500px] rounded-full bg-accent/[0.07] blur-[100px]" />
         <div className="absolute left-1/2 top-1/3 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-primary/[0.04] blur-[80px]" />
       </div>
 

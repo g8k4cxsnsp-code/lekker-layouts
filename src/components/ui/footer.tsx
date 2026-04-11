@@ -1,24 +1,14 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
 import { SITE_CONFIG, FOOTER_LINKS } from "@/lib/constants";
-import { fadeIn, fadeInUp, staggerContainer, staggerContainerFast } from "@/lib/animations";
 
 export function Footer() {
   return (
     <footer className="border-t border-border bg-muted/30">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
-      >
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
-          <motion.div variants={fadeIn} className="space-y-4">
+          <div className="space-y-4">
             <Link href="/" className="inline-block">
               <span className="font-heading text-xl font-bold tracking-tight">
                 Lekker<span className="text-primary">Layouts</span>
@@ -57,48 +47,48 @@ export function Footer() {
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
               </a>
             </div>
-          </motion.div>
+          </div>
 
           {/* Platform */}
-          <motion.div variants={fadeIn}>
+          <div>
             <h3 className="mb-4 font-heading text-sm font-semibold uppercase tracking-wider text-foreground">
               Platform
             </h3>
-            <motion.ul variants={staggerContainerFast} className="space-y-3">
+            <ul className="space-y-3">
               {FOOTER_LINKS.platform.map((link) => (
-                <motion.li key={link.href} variants={fadeInUp}>
+                <li key={link.href}>
                   <Link
                     href={link.href}
                     className="text-sm text-muted-foreground transition-colors hover:text-primary"
                   >
                     {link.label}
                   </Link>
-                </motion.li>
+                </li>
               ))}
-            </motion.ul>
-          </motion.div>
+            </ul>
+          </div>
 
           {/* Company */}
-          <motion.div variants={fadeIn}>
+          <div>
             <h3 className="mb-4 font-heading text-sm font-semibold uppercase tracking-wider text-foreground">
               Company
             </h3>
-            <motion.ul variants={staggerContainerFast} className="space-y-3">
+            <ul className="space-y-3">
               {FOOTER_LINKS.company.map((link) => (
-                <motion.li key={link.href} variants={fadeInUp}>
+                <li key={link.href}>
                   <Link
                     href={link.href}
                     className="text-sm text-muted-foreground transition-colors hover:text-primary"
                   >
                     {link.label}
                   </Link>
-                </motion.li>
+                </li>
               ))}
-            </motion.ul>
-          </motion.div>
+            </ul>
+          </div>
 
           {/* Contact & Legal */}
-          <motion.div variants={fadeIn}>
+          <div>
             <h3 className="mb-4 font-heading text-sm font-semibold uppercase tracking-wider text-foreground">
               Get in Touch
             </h3>
@@ -134,22 +124,19 @@ export function Footer() {
                 ))}
               </ul>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom bar */}
-        <motion.div
-          variants={fadeIn}
-          className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row"
-        >
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
           <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} Lekker Layouts. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground">
-            Proudly South African 🇿🇦
+            Proudly South African
           </p>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </footer>
   );
 }

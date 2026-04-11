@@ -33,41 +33,37 @@ export default async function ProfilePage({
 
   const isOwn = user?.id === profile.id;
 
-  // Check connection status
-  let connectionStatus: "none" | "pending" | "connected" = "none";
-  if (user && !isOwn) {
-    const { data: conn } = await supabase
+  // Run posts, connections count, and connection status in parallel
+  const [{ data: posts }, { count: connectionsCount }, connectionStatus] = await Promise.all([
+    supabase
+      .from("posts")
+      .select(`
+        *,
+        profiles:user_id (
+          id, username, full_name, business_name, industry, logo_url, is_premium
+        )
+      `)
+      .eq("user_id", profile.id)
+      .order("created_at", { ascending: false })
+      .limit(20),
+    supabase
       .from("connections")
-      .select("status")
-      .or(
-        `and(requester_id.eq.${user.id},receiver_id.eq.${profile.id}),and(requester_id.eq.${profile.id},receiver_id.eq.${user.id})`
-      )
-      .single();
-
-    if (conn) {
-      connectionStatus = conn.status === "accepted" ? "connected" : "pending";
-    }
-  }
-
-  // Fetch user's posts
-  const { data: posts } = await supabase
-    .from("posts")
-    .select(`
-      *,
-      profiles:user_id (
-        id, username, full_name, business_name, industry, logo_url, is_premium
-      )
-    `)
-    .eq("user_id", profile.id)
-    .order("created_at", { ascending: false })
-    .limit(20);
-
-  // Fetch connections count
-  const { count: connectionsCount } = await supabase
-    .from("connections")
-    .select("*", { count: "exact", head: true })
-    .eq("status", "accepted")
-    .or(`requester_id.eq.${profile.id},receiver_id.eq.${profile.id}`);
+      .select("*", { count: "exact", head: true })
+      .eq("status", "accepted")
+      .or(`requester_id.eq.${profile.id},receiver_id.eq.${profile.id}`),
+    (async (): Promise<"none" | "pending" | "connected"> => {
+      if (!user || isOwn) return "none";
+      const { data: conn } = await supabase
+        .from("connections")
+        .select("status")
+        .or(
+          `and(requester_id.eq.${user.id},receiver_id.eq.${profile.id}),and(requester_id.eq.${profile.id},receiver_id.eq.${user.id})`
+        )
+        .single();
+      if (conn) return conn.status === "accepted" ? "connected" : "pending";
+      return "none";
+    })(),
+  ]);
 
   return (
     <ProfileContent
