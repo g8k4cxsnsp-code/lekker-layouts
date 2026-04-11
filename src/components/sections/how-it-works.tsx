@@ -90,13 +90,13 @@ export function HowItWorks() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.3 + i * 0.2, ease: [0.25, 0.1, 0.25, 1] }}
                   style={{ originX: 0 }}
-                  className="absolute right-0 top-12 hidden h-px w-full translate-x-1/2 bg-gradient-to-r from-border to-transparent lg:block"
+                  className="absolute right-0 top-12 hidden h-px w-full translate-x-1/2 bg-gradient-to-r from-primary/30 to-transparent lg:block"
                 />
               )}
 
               <motion.div
                 variants={scaleIn}
-                className="relative mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl border border-border/60 bg-card text-primary shadow-sm"
+                className="relative mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl border-2 border-primary/30 bg-card text-primary shadow-sm"
               >
                 {step.icon}
                 <span className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground shadow-md shadow-primary/20">

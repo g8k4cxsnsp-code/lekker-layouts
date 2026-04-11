@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Users, Briefcase, TrendingUp } from "lucide-react";
+import { ArrowRight, Users, Briefcase, Zap, Shield } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { cn } from "@/lib/utils";
 import { fadeInUp, blurIn, popIn, staggerContainer, float } from "@/lib/animations";
 
@@ -40,11 +39,11 @@ export function HeroSection() {
           {/* Headline */}
           <motion.h1
             variants={blurIn}
-            className="font-heading text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[1.05]"
+            className="font-heading text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-[5.5rem] lg:leading-[1.05]"
           >
-            Where SA Businesses{" "}
+            The Networking Hub for{" "}
             <span className="animate-gradient bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              Grow Together
+              SA Entrepreneurs
             </span>
           </motion.h1>
 
@@ -53,9 +52,9 @@ export function HeroSection() {
             variants={fadeInUp}
             className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
           >
-            The networking hub for South African small business owners.
-            Connect with other entrepreneurs, share your journey, get discovered,
-            and access tools to grow your brand — all in one place.
+            Create your business profile, connect with fellow entrepreneurs,
+            share your journey, and access personalised digital tools to grow
+            your brand — all in one free platform.
           </motion.p>
 
           {/* CTAs */}
@@ -71,7 +70,7 @@ export function HeroSection() {
                   "gap-2 px-8 py-3 text-base font-semibold glow-primary"
                 )}
               >
-                Join Free
+                Create Free Account
                 <ArrowRight size={18} />
               </Link>
             </motion.div>
@@ -91,12 +90,13 @@ export function HeroSection() {
           {/* Stats */}
           <motion.div
             variants={popIn}
-            className="mx-auto mt-20 grid max-w-2xl grid-cols-3 gap-8 rounded-2xl border border-border/60 bg-card/50 p-8 shadow-sm backdrop-blur-sm"
+            className="mx-auto mt-20 grid max-w-3xl grid-cols-2 gap-6 sm:grid-cols-4 rounded-2xl border-2 border-primary/30 bg-card/50 p-6 sm:p-8 shadow-sm backdrop-blur-sm"
           >
             {[
-              { icon: <Users size={22} />, label: "Business owners", counter: <>Free to join</> },
-              { icon: <Briefcase size={22} />, label: "Industries", counter: <><AnimatedCounter target={10} duration={1} />+</> },
-              { icon: <TrendingUp size={22} />, label: "Grow your brand", counter: <>100%</> },
+              { icon: <Shield size={22} />, label: "Free Forever", value: "R0" },
+              { icon: <Briefcase size={22} />, label: "Industries", value: "10+" },
+              { icon: <Users size={22} />, label: "Network & Grow", value: "Connect" },
+              { icon: <Zap size={22} />, label: "Setup Time", value: "<2 min" },
             ].map((item, i) => (
               <motion.div
                 key={item.label}
@@ -105,11 +105,11 @@ export function HeroSection() {
                 transition={{ delay: 0.8 + i * 0.15, duration: 0.5 }}
                 className="flex flex-col items-center gap-2"
               >
-                <div className="mb-1 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <div className="mb-1 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
                   {item.icon}
                 </div>
-                <span className="font-heading text-2xl font-bold text-foreground sm:text-3xl">
-                  {item.counter}
+                <span className="font-heading text-xl font-bold text-foreground sm:text-2xl">
+                  {item.value}
                 </span>
                 <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                   {item.label}

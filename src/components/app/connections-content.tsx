@@ -288,7 +288,7 @@ function PersonCard({
   return (
     <div
       className={cn(
-        "flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-opacity",
+        "flex items-center gap-3 rounded-2xl border-2 border-primary/15 bg-card p-4 transition-opacity",
         loading && "opacity-60"
       )}
     >
@@ -345,8 +345,8 @@ function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-12 text-center">
-      <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-muted text-muted-foreground">
+    <div className="rounded-2xl border-2 border-primary/20 bg-card p-12 text-center">
+      <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
         {icon}
       </div>
       <h3 className="font-heading text-base font-semibold text-foreground">

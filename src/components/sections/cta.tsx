@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
@@ -23,6 +23,11 @@ export function CTASection() {
           viewport={{ once: true, margin: "-100px" }}
           className="mx-auto max-w-3xl text-center"
         >
+          <motion.div variants={fadeInUp}>
+            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-primary/20">
+              <Sparkles size={28} className="text-primary" />
+            </div>
+          </motion.div>
           <motion.h2
             variants={fadeInUp}
             className="font-heading text-3xl font-bold tracking-tight text-background sm:text-4xl lg:text-5xl"
@@ -31,10 +36,11 @@ export function CTASection() {
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className="mt-6 text-lg text-background/70"
+            className="mt-6 text-lg leading-relaxed text-background/70"
           >
             Join South African entrepreneurs who are building their networks,
             sharing their stories, and growing their brands on Lekker Layouts.
+            It&apos;s completely free to get started.
           </motion.p>
           <motion.div
             variants={fadeInUp}
@@ -44,10 +50,10 @@ export function CTASection() {
               href="/register"
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "gap-2 px-8 text-base font-semibold"
+                "gap-2 px-8 text-base font-semibold glow-primary"
               )}
             >
-              Join Free
+              Create Free Account
               <ArrowRight size={18} />
             </Link>
             <Link

@@ -10,6 +10,8 @@ import {
   Search,
   Pencil,
   Users,
+  TrendingUp,
+  Sparkles,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -59,10 +61,12 @@ export function FeedContent({
             {localPosts.length === 0 ? (
               <motion.div
                 variants={fadeInUp}
-                className="rounded-xl border border-border bg-card p-12 text-center"
+                className="rounded-2xl border-2 border-primary/20 bg-card p-12 text-center"
               >
-                <Users size={32} className="mx-auto text-muted-foreground" />
-                <h3 className="mt-3 font-heading text-lg font-semibold text-foreground">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+                  <Users size={28} className="text-primary" />
+                </div>
+                <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">
                   Your feed is empty
                 </h3>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -87,48 +91,80 @@ export function FeedContent({
           </motion.div>
         </div>
 
-        {/* Right sidebar — LinkedIn style */}
+        {/* Right sidebar */}
         <aside className="hidden w-72 shrink-0 lg:block">
           <div className="sticky top-20 space-y-4">
             {/* Profile card */}
-            <div className="rounded-xl border border-border bg-card p-4">
-              <Link
-                href="/profile"
-                className="flex items-center gap-3 group"
-              >
-                <UserAvatar
-                  src={profile?.logo_url}
-                  name={profile?.business_name || profile?.full_name}
-                  size="md"
-                />
-                <div className="min-w-0">
-                  <p className="font-heading text-sm font-semibold text-foreground group-hover:underline truncate">
+            <div className="overflow-hidden rounded-2xl border-2 border-primary/20 bg-card">
+              <div className="h-16 bg-gradient-to-r from-primary/20 via-accent/10 to-primary/10" />
+              <div className="-mt-8 px-4 pb-4">
+                <Link
+                  href="/profile"
+                  className="flex flex-col items-center text-center group"
+                >
+                  <UserAvatar
+                    src={profile?.logo_url}
+                    name={profile?.business_name || profile?.full_name}
+                    size="md"
+                    className="ring-4 ring-card"
+                  />
+                  <p className="mt-2 font-heading text-sm font-semibold text-foreground group-hover:underline truncate max-w-full">
                     {profile?.business_name || profile?.full_name}
                   </p>
                   {profile?.industry && (
-                    <p className="text-xs text-muted-foreground truncate">
+                    <p className="text-xs text-muted-foreground truncate max-w-full">
                       {profile.industry}
                     </p>
                   )}
-                </div>
-              </Link>
-              {!profile?.profile_completed && (
-                <Link
-                  href="/profile/setup"
-                  className={cn(
-                    buttonVariants({ variant: "outline", size: "sm" }),
-                    "mt-3 w-full gap-1.5"
-                  )}
-                >
-                  <Pencil size={12} />
-                  Complete Your Profile
                 </Link>
-              )}
+                {!profile?.profile_completed && (
+                  <Link
+                    href="/profile/setup"
+                    className={cn(
+                      buttonVariants({ variant: "outline", size: "sm" }),
+                      "mt-3 w-full gap-1.5"
+                    )}
+                  >
+                    <Pencil size={12} />
+                    Complete Your Profile
+                  </Link>
+                )}
+              </div>
+            </div>
+
+            {/* Quick links */}
+            <div className="rounded-2xl border border-border bg-card p-4">
+              <h3 className="font-heading text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Quick Actions
+              </h3>
+              <div className="mt-3 space-y-1">
+                <Link
+                  href="/tools"
+                  className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm text-foreground transition-colors hover:bg-muted"
+                >
+                  <Sparkles size={16} className="text-primary" />
+                  Digital Products
+                </Link>
+                <Link
+                  href="/premium"
+                  className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm text-foreground transition-colors hover:bg-muted"
+                >
+                  <Crown size={16} className="text-amber-500" />
+                  Go Premium
+                </Link>
+                <Link
+                  href="/discover"
+                  className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm text-foreground transition-colors hover:bg-muted"
+                >
+                  <TrendingUp size={16} className="text-accent" />
+                  Discover
+                </Link>
+              </div>
             </div>
 
             {/* Suggested connections */}
             {suggestedProfiles.length > 0 && (
-              <div className="rounded-xl border border-border bg-card p-4">
+              <div className="rounded-2xl border border-border bg-card p-4">
                 <h3 className="font-heading text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   People you may know
                 </h3>

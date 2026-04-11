@@ -15,7 +15,7 @@ import {
   Crown,
 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { fadeInUp } from "@/lib/animations";
 import { createClient } from "@/lib/supabase/client";
@@ -127,7 +127,7 @@ export default function SettingsPage() {
 
           {/* Account */}
           <TabsContent value="account" className="mt-6 space-y-4">
-            <div className="rounded-xl border border-border bg-card p-5 space-y-4">
+            <div className="rounded-2xl border-2 border-primary/20 bg-card p-5 space-y-4">
               <div>
                 <label className="text-sm font-medium text-foreground">
                   Full Name
@@ -184,21 +184,18 @@ export default function SettingsPage() {
                 </p>
               )}
 
-              <button
+              <Button
                 onClick={handleSaveAccount}
-                disabled={saving}
-                className={cn(buttonVariants(), "gap-2")}
+                loading={saving}
+                loadingText="Saving..."
+                className="gap-2"
               >
-                {saving ? (
-                  <Loader2 size={14} className="animate-spin" />
-                ) : (
-                  <Save size={14} />
-                )}
+                <Save size={14} />
                 Save Changes
-              </button>
+              </Button>
             </div>
 
-            <div className="rounded-xl border border-border bg-card p-5">
+            <div className="rounded-2xl border border-border bg-card p-5">
               <button
                 onClick={handleSignOut}
                 className={cn(
@@ -214,7 +211,7 @@ export default function SettingsPage() {
 
           {/* Subscription */}
           <TabsContent value="subscription" className="mt-6">
-            <div className="rounded-xl border border-border bg-card p-5">
+            <div className="rounded-2xl border-2 border-primary/20 bg-card p-5">
               {profile?.is_premium ? (
                 <div>
                   <div className="flex items-center gap-2">
@@ -264,7 +261,7 @@ export default function SettingsPage() {
 
           {/* Danger Zone */}
           <TabsContent value="danger" className="mt-6">
-            <div className="rounded-xl border border-destructive/30 bg-card p-5">
+            <div className="rounded-2xl border-2 border-destructive/30 bg-card p-5">
               <div className="flex items-center gap-2">
                 <Trash2 size={16} className="text-destructive" />
                 <h3 className="font-heading text-sm font-semibold text-destructive">

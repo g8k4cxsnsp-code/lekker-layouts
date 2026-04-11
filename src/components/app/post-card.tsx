@@ -15,8 +15,8 @@ interface PostCardProps {
 }
 
 const postTypeConfig = {
-  deal: { icon: Tag, label: "Deal", color: "text-green-600 bg-green-50 dark:bg-green-950/30" },
-  announcement: { icon: Megaphone, label: "Announcement", color: "text-blue-600 bg-blue-50 dark:bg-blue-950/30" },
+  deal: { icon: Tag, label: "Deal", color: "text-green-600 bg-green-50 dark:bg-green-950/30", border: "border-l-green-500" },
+  announcement: { icon: Megaphone, label: "Announcement", color: "text-blue-600 bg-blue-50 dark:bg-blue-950/30", border: "border-l-blue-500" },
   update: null,
 };
 
@@ -93,7 +93,10 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
   const timeAgo = getTimeAgo(new Date(post.created_at));
 
   return (
-    <div className="rounded-xl border border-border bg-card">
+    <div className={cn(
+      "rounded-xl border border-border bg-card transition-all hover:shadow-sm",
+      typeConfig ? `border-l-4 ${typeConfig.border}` : ""
+    )}>
       <div className="p-4">
         {/* Header */}
         <div className="flex items-start gap-3">
@@ -158,14 +161,14 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
         )}
 
         {/* Actions */}
-        <div className="mt-3 flex items-center gap-1 border-t border-border/50 pt-2">
+        <div className="mt-3 flex items-center gap-1 rounded-lg bg-muted/50 p-1">
           <button
             onClick={handleLike}
             className={cn(
               "flex flex-1 items-center justify-center gap-1.5 rounded-md py-2 text-xs font-medium transition-colors",
               liked
-                ? "text-red-500"
-                : "text-muted-foreground hover:bg-muted hover:text-red-500"
+                ? "text-red-500 bg-red-50 dark:bg-red-950/20"
+                : "text-muted-foreground hover:bg-card hover:text-red-500"
             )}
           >
             <Heart size={16} fill={liked ? "currentColor" : "none"} />
@@ -174,7 +177,7 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
 
           <button
             onClick={toggleComments}
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-md py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="flex flex-1 items-center justify-center gap-1.5 rounded-md py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-card hover:text-primary"
           >
             <MessageCircle size={16} />
             Comment

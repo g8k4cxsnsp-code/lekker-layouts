@@ -5,8 +5,6 @@ import { HeroSection } from "@/components/sections/hero";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { WhyCustomCode } from "@/components/sections/why-custom-code";
 import { ServicesOverview } from "@/components/sections/services-overview";
-import { Testimonials } from "@/components/sections/testimonials";
-import { FeaturedTemplates } from "@/components/sections/featured-templates";
 import { CTASection } from "@/components/sections/cta";
 
 export default function Home() {
@@ -17,9 +15,7 @@ export default function Home() {
         <HeroSection />
         <HowItWorks />
         <WhyCustomCode />
-        <Testimonials />
         <ServicesOverview />
-        <FeaturedTemplates />
         <CTASection />
       </main>
       <Footer />

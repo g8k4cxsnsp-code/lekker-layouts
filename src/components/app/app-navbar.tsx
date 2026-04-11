@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Bell, Search, LogOut } from "lucide-react";
+import { Bell, Search, LogOut, UserCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -9,9 +9,12 @@ import { signOut } from "@/lib/actions/auth";
 
 interface AppNavbarProps {
   userName?: string;
+  userAvatar?: string | null;
 }
 
-export function AppNavbar({ userName }: AppNavbarProps) {
+export function AppNavbar({ userName, userAvatar }: AppNavbarProps) {
+  const initial = userName?.[0]?.toUpperCase() || "U";
+
   return (
     <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-border/30 bg-background/70 px-4 backdrop-blur-xl sm:px-6 lg:pl-72">
       {/* Search */}
@@ -33,6 +36,23 @@ export function AppNavbar({ userName }: AppNavbarProps) {
           className="relative rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
           <Bell size={20} />
+        </Link>
+        <Link
+          href="/profile"
+          className="rounded-lg p-1.5 transition-colors hover:bg-muted"
+          title="My Profile"
+        >
+          {userAvatar ? (
+            <img
+              src={userAvatar}
+              alt={userName || "Profile"}
+              className="h-7 w-7 rounded-full object-cover"
+            />
+          ) : (
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+              {initial}
+            </div>
+          )}
         </Link>
         <form action={signOut}>
           <button

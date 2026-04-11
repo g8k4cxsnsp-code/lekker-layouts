@@ -1,8 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Search, Users, MessageCircle, Crown, ShoppingBag, TrendingUp } from "lucide-react";
+import { Search, Users, MessageCircle, Crown, ShoppingBag, TrendingUp, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { fadeIn, fadeInUp, staggerContainerFast } from "@/lib/animations";
 
 const benefits = [
@@ -90,9 +93,9 @@ export function WhyCustomCode() {
               key={benefit.title}
               variants={fadeInUp}
               whileHover={{ y: -4 }}
-              className="group rounded-2xl border border-border/60 bg-card p-7 transition-shadow hover:shadow-md"
+              className="group rounded-2xl border-2 border-primary/20 bg-card p-7 transition-all hover:border-primary/40 hover:shadow-md"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform group-hover:scale-110">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-transform group-hover:scale-110">
                 {benefit.icon}
               </div>
               <h3 className="mt-4 font-heading text-lg font-bold text-foreground">
@@ -103,6 +106,25 @@ export function WhyCustomCode() {
               </p>
             </motion.div>
           ))}
+        </motion.div>
+
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-12 text-center"
+        >
+          <Link
+            href="/register"
+            className={cn(
+              buttonVariants({ size: "lg" }),
+              "gap-2 px-8 text-base font-semibold glow-primary"
+            )}
+          >
+            Get Started Free
+            <ArrowRight size={18} />
+          </Link>
         </motion.div>
       </div>
     </section>

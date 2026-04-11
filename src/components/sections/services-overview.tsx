@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Users, Crown, ShoppingBag, ArrowRight } from "lucide-react";
+import { Users, Crown, ShoppingBag, ArrowRight, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -13,8 +13,15 @@ const offerings = [
     icon: <Users size={28} />,
     title: "Free Membership",
     description:
-      "Create your business profile, connect with other entrepreneurs, post updates and deals, and message your network. Everything you need to get started — completely free.",
+      "Everything you need to start building your business network.",
+    features: [
+      "Full business profile",
+      "Connect with entrepreneurs",
+      "Post updates & deals",
+      "Direct messaging",
+    ],
     price: "Free",
+    period: "forever",
     cta: "Join Now",
     href: "/register",
     highlight: true,
@@ -24,9 +31,16 @@ const offerings = [
     icon: <Crown size={28} />,
     title: "Premium",
     description:
-      "Boost your profile to the top of search results, get a verified badge, and enjoy 15% off all digital products. Stand out from the crowd.",
-    price: "R99/month",
-    cta: "Learn More",
+      "Boost your presence and stand out from the crowd.",
+    features: [
+      "Top of search results",
+      "Premium verified badge",
+      "15% off all products",
+      "Priority support",
+    ],
+    price: "R249",
+    period: "/month",
+    cta: "Go Premium",
     href: "/register",
     highlight: false,
   },
@@ -34,8 +48,15 @@ const offerings = [
     icon: <ShoppingBag size={28} />,
     title: "Digital Products",
     description:
-      "Website blueprints, social media kits, copy packs, and more — all personalised using your profile data. No forms to fill in, just one-click purchase.",
+      "Personalised business tools delivered to your inbox.",
+    features: [
+      "Website blueprints",
+      "Social media kits",
+      "Copy packs",
+      "Personalised to your brand",
+    ],
     price: "From R149",
+    period: "",
     cta: "Browse Products",
     href: "/products",
     highlight: false,
@@ -85,10 +106,10 @@ export function ServicesOverview() {
               variants={fadeInUp}
               whileHover={{ y: -6 }}
               className={cn(
-                "relative flex flex-col rounded-2xl border p-8 transition-shadow hover:shadow-lg",
+                "relative flex flex-col rounded-2xl border-2 p-8 transition-shadow hover:shadow-lg",
                 item.highlight
                   ? "border-primary/30 bg-primary text-primary-foreground"
-                  : "border-border/60 bg-card"
+                  : "border-primary/20 bg-card"
               )}
             >
               {item.badge && (
@@ -99,7 +120,7 @@ export function ServicesOverview() {
 
               <div
                 className={cn(
-                  "flex h-14 w-14 items-center justify-center rounded-xl",
+                  "flex h-14 w-14 items-center justify-center rounded-full",
                   item.highlight ? "bg-primary-foreground/10" : "bg-primary/10 text-primary"
                 )}
               >
@@ -111,7 +132,7 @@ export function ServicesOverview() {
               </h3>
               <p
                 className={cn(
-                  "mt-3 flex-1 text-sm leading-relaxed",
+                  "mt-2 text-sm leading-relaxed",
                   item.highlight
                     ? "text-primary-foreground/80"
                     : "text-muted-foreground"
@@ -121,10 +142,32 @@ export function ServicesOverview() {
               </p>
 
               <div className="mt-6">
-                <span className="font-heading text-2xl font-bold">
+                <span className="font-heading text-3xl font-bold">
                   {item.price}
                 </span>
+                {item.period && (
+                  <span className={cn(
+                    "text-sm",
+                    item.highlight ? "text-primary-foreground/60" : "text-muted-foreground"
+                  )}>
+                    {item.period}
+                  </span>
+                )}
               </div>
+
+              <ul className="mt-6 flex-1 space-y-3">
+                {item.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-2 text-sm">
+                    <Check size={16} className={cn(
+                      "shrink-0",
+                      item.highlight ? "text-accent" : "text-primary"
+                    )} />
+                    <span className={item.highlight ? "text-primary-foreground/90" : "text-foreground"}>
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
 
               <Link
                 href={item.href}
@@ -133,7 +176,7 @@ export function ServicesOverview() {
                     variant: item.highlight ? "secondary" : "default",
                     size: "lg",
                   }),
-                  "mt-4 gap-2"
+                  "mt-6 gap-2"
                 )}
               >
                 {item.cta}

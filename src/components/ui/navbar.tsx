@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, LogIn, UserPlus } from "lucide-react";
+import { Menu, X, LogIn, UserPlus, UserCircle, LayoutDashboard, Settings, LogOut } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -25,7 +25,9 @@ export function LekkerLogo({ className }: { className?: string }) {
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [user, setUser] = useState<{ id: string } | null>(null);
+  const [profile, setProfile] = useState<{ logo_url?: string; full_name?: string; business_name?: string } | null>(null);
   const [loading, setLoading] = useState(true);
   const pathname = usePathname();
 
@@ -36,8 +38,16 @@ export function Navbar() {
       return;
     }
 
-    supabase.auth.getUser().then(({ data }: { data: { user: User | null } }) => {
+    supabase.auth.getUser().then(async ({ data }: { data: { user: User | null } }) => {
       setUser(data.user);
+      if (data.user) {
+        const { data: profileData } = await supabase
+          .from("profiles")
+          .select("logo_url, full_name, business_name")
+          .eq("id", data.user.id)
+          .single();
+        if (profileData) setProfile(profileData);
+      }
       setLoading(false);
     });
 
@@ -45,10 +55,21 @@ export function Navbar() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
       setUser(session?.user ?? null);
+      if (!session?.user) setProfile(null);
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // Close profile dropdown when clicking outside
+  useEffect(() => {
+    if (!profileOpen) return;
+    const handleClick = () => setProfileOpen(false);
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [profileOpen]);
+
+  const initial = (profile?.business_name || profile?.full_name)?.[0]?.toUpperCase() || "U";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/70 backdrop-blur-xl backdrop-saturate-150">
@@ -82,9 +103,67 @@ export function Navbar() {
           {!loading && (
             <>
               {user ? (
-                <Link href="/feed" className={buttonVariants()}>
-                  Dashboard
-                </Link>
+                <div className="relative">
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setProfileOpen(!profileOpen); }}
+                    className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-muted"
+                  >
+                    {profile?.logo_url ? (
+                      <img
+                        src={profile.logo_url}
+                        alt="Profile"
+                        className="h-8 w-8 rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+                        {initial}
+                      </div>
+                    )}
+                  </button>
+                  <AnimatePresence>
+                    {profileOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: -4 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -4 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute right-0 top-full mt-2 w-48 rounded-xl border border-border bg-card p-1.5 shadow-lg"
+                      >
+                        <Link
+                          href="/feed"
+                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-muted"
+                        >
+                          <LayoutDashboard size={16} />
+                          Dashboard
+                        </Link>
+                        <Link
+                          href="/profile"
+                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-muted"
+                        >
+                          <UserCircle size={16} />
+                          Profile
+                        </Link>
+                        <Link
+                          href="/settings"
+                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-muted"
+                        >
+                          <Settings size={16} />
+                          Settings
+                        </Link>
+                        <div className="my-1 border-t border-border" />
+                        <form action="/api/auth/signout" method="POST">
+                          <Link
+                            href="/login"
+                            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-destructive transition-colors hover:bg-destructive/10"
+                          >
+                            <LogOut size={16} />
+                            Sign Out
+                          </Link>
+                        </form>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               ) : (
                 <>
                   <Link
@@ -107,6 +186,30 @@ export function Navbar() {
         {/* Mobile menu button */}
         <div className="flex items-center gap-2 lg:hidden">
           <ThemeToggle />
+          {!loading && user && (
+            <Link
+              href="/profile"
+              className="rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+            >
+              {profile?.logo_url ? (
+                <img
+                  src={profile.logo_url}
+                  alt="Profile"
+                  className="h-6 w-6 rounded-full object-cover"
+                />
+              ) : (
+                <UserCircle size={24} />
+              )}
+            </Link>
+          )}
+          {!loading && !user && (
+            <Link
+              href="/login"
+              className="rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+            >
+              <UserCircle size={24} />
+            </Link>
+          )}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -147,13 +250,24 @@ export function Navbar() {
                 {!loading && (
                   <>
                     {user ? (
-                      <Link
-                        href="/feed"
-                        onClick={() => setMobileOpen(false)}
-                        className={cn(buttonVariants(), "w-full")}
-                      >
-                        Dashboard
-                      </Link>
+                      <>
+                        <Link
+                          href="/feed"
+                          onClick={() => setMobileOpen(false)}
+                          className={cn(buttonVariants(), "w-full gap-2")}
+                        >
+                          <LayoutDashboard size={16} />
+                          Dashboard
+                        </Link>
+                        <Link
+                          href="/profile"
+                          onClick={() => setMobileOpen(false)}
+                          className={cn(buttonVariants({ variant: "outline" }), "w-full gap-2")}
+                        >
+                          <UserCircle size={16} />
+                          My Profile
+                        </Link>
+                      </>
                     ) : (
                       <>
                         <Link

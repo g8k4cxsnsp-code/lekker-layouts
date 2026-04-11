@@ -42,8 +42,10 @@ export default async function NotificationsPage() {
       </h1>
 
       {(!notifications || notifications.length === 0) ? (
-        <div className="rounded-xl border border-border bg-card p-12 text-center">
-          <Bell size={48} className="mx-auto text-muted-foreground/30" />
+        <div className="rounded-2xl border-2 border-primary/20 bg-card p-12 text-center">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+            <Bell size={28} className="text-primary" />
+          </div>
           <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">
             No notifications yet
           </h3>
@@ -58,9 +60,9 @@ export default async function NotificationsPage() {
             return (
               <div
                 key={notification.id}
-                className={`flex items-start gap-3 rounded-lg border bg-card p-4 ${
+                className={`flex items-start gap-3 rounded-xl border-2 bg-card p-4 transition-colors ${
                   notification.read
-                    ? "border-border"
+                    ? "border-border/50"
                     : "border-primary/30 bg-primary/5"
                 }`}
               >

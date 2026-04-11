@@ -43,11 +43,30 @@ const benefits = [
   },
 ];
 
+type BillingPeriod = "monthly" | "yearly";
+
+const plans = {
+  monthly: {
+    price: "R249",
+    period: "/month",
+    description: "Billed monthly — cancel anytime",
+    amount: 24900,
+    name: "Lekker Layouts Premium — Monthly",
+  },
+  yearly: {
+    price: "R2,000",
+    period: "/year",
+    description: "Billed annually — save R988/year",
+    amount: 200000,
+    name: "Lekker Layouts Premium — 12 Months",
+  },
+};
+
 export default function PremiumPage() {
   const [loading, setLoading] = useState(false);
   const [isPremium, setIsPremium] = useState(false);
+  const [billing, setBilling] = useState<BillingPeriod>("monthly");
 
-  // Check premium status on mount
   useEffect(() => {
     const check = async () => {
       const supabase = createClient();
@@ -71,6 +90,7 @@ export default function PremiumPage() {
 
   const handleSubscribe = async () => {
     setLoading(true);
+    const plan = plans[billing];
 
     try {
       const res = await fetch("/api/checkout", {
@@ -78,8 +98,8 @@ export default function PremiumPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "premium",
-          amount: 9900, // R99 in cents
-          name: "Lekker Layouts Premium — 30 Days",
+          amount: plan.amount,
+          name: plan.name,
         }),
       });
 
@@ -91,6 +111,8 @@ export default function PremiumPage() {
       setLoading(false);
     }
   };
+
+  const plan = plans[billing];
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6">
@@ -112,17 +134,46 @@ export default function PremiumPage() {
           </p>
         </motion.div>
 
+        {/* Billing toggle */}
+        <motion.div variants={fadeInUp} className="mt-8 flex items-center justify-center gap-1 rounded-full bg-muted p-1">
+          <button
+            onClick={() => setBilling("monthly")}
+            className={cn(
+              "rounded-full px-5 py-2 text-sm font-medium transition-all",
+              billing === "monthly"
+                ? "bg-card text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            Monthly
+          </button>
+          <button
+            onClick={() => setBilling("yearly")}
+            className={cn(
+              "rounded-full px-5 py-2 text-sm font-medium transition-all",
+              billing === "yearly"
+                ? "bg-card text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            Yearly
+            <span className="ml-1.5 rounded-full bg-accent/10 px-2 py-0.5 text-xs font-semibold text-accent">
+              Save R988
+            </span>
+          </button>
+        </motion.div>
+
         {/* Price card */}
         <motion.div
           variants={fadeInUp}
-          className="mt-8 rounded-2xl border-2 border-amber-500/30 bg-card p-6 text-center"
+          className="mt-6 rounded-2xl border-2 border-amber-500/30 bg-card p-6 text-center"
         >
           <div className="flex items-baseline justify-center gap-1">
-            <span className="text-4xl font-bold text-foreground">R99</span>
-            <span className="text-muted-foreground">/month</span>
+            <span className="text-4xl font-bold text-foreground">{plan.price}</span>
+            <span className="text-muted-foreground">{plan.period}</span>
           </div>
           <p className="mt-1 text-xs text-muted-foreground">
-            One-time payment for 30 days of Premium access
+            {plan.description}
           </p>
 
           {isPremium ? (
@@ -136,7 +187,7 @@ export default function PremiumPage() {
               disabled={loading}
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "mt-4 w-full gap-2 bg-amber-500 hover:bg-amber-600 text-white glow-primary"
+                "mt-4 w-full gap-2 bg-amber-500 hover:bg-amber-600 text-white glow-amber"
               )}
             >
               {loading ? (

@@ -101,7 +101,7 @@ export function DiscoverContent({ profiles }: DiscoverContentProps) {
             <motion.div key={profile.id} variants={fadeInUp}>
               <Link
                 href={`/profile/${profile.username || profile.id}`}
-                className="block rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-md"
+                className="block rounded-2xl border-2 border-primary/15 bg-card p-5 transition-all hover:border-primary/30 hover:shadow-md"
               >
                 <div className="flex items-start gap-3">
                   <UserAvatar
@@ -148,7 +148,7 @@ export function DiscoverContent({ profiles }: DiscoverContentProps) {
         {filtered.length === 0 && (
           <motion.div
             variants={fadeInUp}
-            className="mt-8 rounded-xl border border-border bg-card p-12 text-center"
+            className="mt-8 rounded-2xl border-2 border-primary/20 bg-card p-12 text-center"
           >
             <p className="text-muted-foreground">No businesses found matching your search.</p>
           </motion.div>

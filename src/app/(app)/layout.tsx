@@ -20,7 +20,7 @@ export default async function AppLayout({
   // Check if profile is completed
   const { data: profile } = await supabase
     .from("profiles")
-    .select("profile_completed, full_name")
+    .select("profile_completed, full_name, logo_url")
     .eq("id", user.id)
     .single();
 
@@ -34,7 +34,7 @@ export default async function AppLayout({
   }
 
   return (
-    <AppShell userName={profile?.full_name || user.email || ""}>
+    <AppShell userName={profile?.full_name || user.email || ""} userAvatar={profile?.logo_url}>
       {children}
     </AppShell>
   );
