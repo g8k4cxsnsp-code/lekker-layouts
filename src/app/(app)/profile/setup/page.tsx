@@ -2,11 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, Loader2, Briefcase, Palette, Globe } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp } from "@/lib/animations";
 import { QuestionnaireSection } from "@/components/questionnaire/questionnaire-section";
 import { QuestionnaireProgress } from "@/components/questionnaire/questionnaire-progress";
 import { createClient } from "@/lib/supabase/client";
@@ -273,7 +271,7 @@ export default function ProfileSetupPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6">
-        <motion.div variants={fadeInUp} initial="hidden" animate="visible">
+        <div>
           <div className="mb-2 text-center">
             <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground">
               Set up your business profile
@@ -353,7 +351,7 @@ export default function ProfileSetupPage() {
           <p className="mt-4 text-center text-xs text-muted-foreground">
             You can always update these details later in your profile settings.
           </p>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

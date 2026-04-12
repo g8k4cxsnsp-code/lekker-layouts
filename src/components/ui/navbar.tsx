@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, LogIn, UserPlus, UserCircle, LayoutDashboard, Settings, LogOut } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { NAV_LINKS } from "@/lib/constants";
@@ -127,13 +126,8 @@ export function Navbar() {
                       </div>
                     )}
                   </button>
-                  <AnimatePresence>
-                    {profileOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: -4 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: -4 }}
-                        transition={{ duration: 0.15 }}
+                  {profileOpen && (
+                      <div
                         className="absolute right-0 top-full mt-2 w-48 rounded-xl border border-border bg-card p-1.5 shadow-lg"
                       >
                         <Link
@@ -167,10 +161,9 @@ export function Navbar() {
                             Sign Out
                           </Link>
                         </form>
-                      </motion.div>
+                      </div>
                     )}
-                  </AnimatePresence>
-                </div>
+                  </div>
               ) : (
                 <>
                   <Link
@@ -230,13 +223,8 @@ export function Navbar() {
       </nav>
 
       {/* Mobile nav */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
+      {mobileOpen && (
+          <div
             className="overflow-hidden border-t border-border/40 bg-background lg:hidden"
           >
             <div className="space-y-1 px-4 py-4">
@@ -301,9 +289,8 @@ export function Navbar() {
                 )}
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
-    </header>
+      </header>
   );
 }

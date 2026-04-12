@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
@@ -23,7 +22,6 @@ import {
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeIn, fadeInUp, staggerContainer, popIn } from "@/lib/animations";
 import { SITE_CONFIG } from "@/lib/constants";
 import { QuestionnaireSection } from "@/components/questionnaire/questionnaire-section";
 import { QuestionnaireProgress } from "@/components/questionnaire/questionnaire-progress";
@@ -265,7 +263,7 @@ export function OrderFlow({ product }: OrderFlowProps) {
   return (
     <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
       {/* Back link */}
-      <motion.div variants={fadeIn} initial="hidden" animate="visible">
+      <div>
         <Link
           href={`/products/${product.slug}`}
           className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -273,13 +271,10 @@ export function OrderFlow({ product }: OrderFlowProps) {
           <ArrowLeft size={16} />
           Back to {product.name}
         </Link>
-      </motion.div>
+      </div>
 
       {/* Header */}
-      <motion.div
-        variants={fadeInUp}
-        initial="hidden"
-        animate="visible"
+      <div
         className="mb-2"
       >
         <h1 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
@@ -288,7 +283,7 @@ export function OrderFlow({ product }: OrderFlowProps) {
         <p className="mt-2 text-muted-foreground">
           Tell us about your business, then complete payment. Your personalised results will be emailed {product.estimatedDelivery.toLowerCase()}.
         </p>
-      </motion.div>
+      </div>
 
       {/* Progress bar */}
       <div className="my-8">
@@ -301,9 +296,7 @@ export function OrderFlow({ product }: OrderFlowProps) {
 
       {/* Cancelled / Error banner */}
       {(wasCancelled || flowStep === "error") && errorMessage && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
+        <div
           className="mb-6 flex items-start gap-3 rounded-lg border border-destructive/30 bg-destructive/5 p-4"
         >
           <AlertCircle size={18} className="mt-0.5 shrink-0 text-destructive" />
@@ -322,12 +315,12 @@ export function OrderFlow({ product }: OrderFlowProps) {
               for help.
             </p>
           </div>
-        </motion.div>
+        </div>
       )}
 
       {/* ─── Questionnaire Step ──────────────────────────────── */}
       {flowStep === "questionnaire" && (
-        <motion.div variants={fadeInUp} initial="hidden" animate="visible">
+        <div>
           <div className="rounded-xl border border-border bg-card p-6">
             <QuestionnaireSection
               section={sections[currentSection]}
@@ -358,19 +351,16 @@ export function OrderFlow({ product }: OrderFlowProps) {
               <ArrowRight size={16} />
             </button>
           </div>
-        </motion.div>
+        </div>
       )}
 
       {/* ─── Details Step ────────────────────────────────────── */}
       {flowStep === "details" && (
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
+        <div
           className="space-y-6"
         >
           {/* Contact info card */}
-          <motion.div variants={fadeInUp} className="rounded-xl border border-border bg-card p-6 space-y-5">
+          <div className="rounded-xl border border-border bg-card p-6 space-y-5">
             <div className="flex items-center gap-2">
               <User size={18} className="text-primary" />
               <h2 className="font-heading text-lg font-semibold text-foreground">
@@ -425,10 +415,10 @@ export function OrderFlow({ product }: OrderFlowProps) {
                 Your results will be emailed here {product.estimatedDelivery.toLowerCase()}.
               </p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Order summary card */}
-          <motion.div variants={fadeInUp} className="rounded-xl border border-border bg-card p-6">
+          <div className="rounded-xl border border-border bg-card p-6">
             <h2 className="font-heading text-sm font-semibold uppercase tracking-wider text-muted-foreground">
               Order Summary
             </h2>
@@ -468,10 +458,10 @@ export function OrderFlow({ product }: OrderFlowProps) {
                 )}
               </ul>
             </div>
-          </motion.div>
+          </div>
 
           {/* Security badges */}
-          <motion.div variants={fadeIn} className="flex items-center justify-center gap-6 text-xs text-muted-foreground">
+          <div className="flex items-center justify-center gap-6 text-xs text-muted-foreground">
             <span className="flex items-center gap-1.5">
               <Lock size={14} />
               SSL Encrypted
@@ -480,10 +470,10 @@ export function OrderFlow({ product }: OrderFlowProps) {
               <ShieldCheck size={14} />
               Secure Payment via Yoco
             </span>
-          </motion.div>
+          </div>
 
           {/* Navigation */}
-          <motion.div variants={fadeIn} className="flex gap-3">
+          <div className="flex gap-3">
             <button
               type="button"
               onClick={handleBackToQuestionnaire}
@@ -501,23 +491,20 @@ export function OrderFlow({ product }: OrderFlowProps) {
               <CreditCard size={16} />
               Pay R{product.price}
             </button>
-          </motion.div>
+          </div>
 
           <p className="text-center text-xs text-muted-foreground">
             You&apos;ll be redirected to Yoco&apos;s secure payment page. After payment, your personalised results will be emailed {product.estimatedDelivery.toLowerCase()}.
           </p>
-        </motion.div>
+        </div>
       )}
 
       {/* ─── Error State ─────────────────────────────────────── */}
       {flowStep === "error" && (
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
+        <div
           className="text-center py-8"
         >
-          <motion.div variants={fadeInUp}>
+          <div>
             <AlertCircle size={48} className="mx-auto text-destructive" />
             <h2 className="mt-4 font-heading text-xl font-bold text-foreground">
               Something went wrong
@@ -544,8 +531,8 @@ export function OrderFlow({ product }: OrderFlowProps) {
                 WhatsApp Us for Help
               </a>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       )}
     </div>
   );

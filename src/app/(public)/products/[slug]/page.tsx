@@ -1,9 +1,6 @@
 import { notFound } from "next/navigation";
 import { products } from "@/data/products";
 import { ProductDetailContent } from "./product-detail-content";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 
 export function generateStaticParams() {
   return products.map((product) => ({
@@ -25,10 +22,7 @@ export default async function ProductDetailPage({
 
   return (
     <>
-      <Navbar />
       <ProductDetailContent product={product} />
-      <Footer />
-      <WhatsAppButton />
     </>
   );
 }

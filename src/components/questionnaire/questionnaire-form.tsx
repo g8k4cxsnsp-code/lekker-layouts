@@ -1,11 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Loader2, AlertCircle } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp } from "@/lib/animations";
 import { submitQuestionnaire } from "@/lib/webhooks";
 import { SITE_CONFIG } from "@/lib/constants";
 import { QuestionnaireSection } from "./questionnaire-section";
@@ -184,7 +182,7 @@ export function QuestionnaireForm({
   const stepLabels = sections.map((s) => s.title);
 
   return (
-    <motion.div variants={fadeInUp} initial="hidden" animate="visible">
+    <div>
       {/* Multi-step progress */}
       {isMultiStep && (
         <QuestionnaireProgress
@@ -291,6 +289,6 @@ export function QuestionnaireForm({
           </button>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }

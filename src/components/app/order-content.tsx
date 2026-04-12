@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import {
   Check,
   Loader2,
@@ -15,7 +14,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
 import type { Product } from "@/data/products";
 
 interface OrderContentProps {
@@ -85,14 +83,10 @@ export function OrderContent({
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
+      <div
       >
         {/* Product header */}
-        <motion.div
-          variants={fadeInUp}
+        <div
           className="rounded-xl border border-border bg-card p-6"
         >
           <div className="flex items-start gap-4">
@@ -115,11 +109,10 @@ export function OrderContent({
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Profile data summary */}
-        <motion.div
-          variants={fadeInUp}
+        <div
           className="mt-4 rounded-xl border border-border bg-card p-5"
         >
           <h3 className="font-heading text-sm font-semibold text-foreground mb-3">
@@ -147,11 +140,10 @@ export function OrderContent({
           <p className="mt-3 text-xs text-muted-foreground">
             No forms to fill in — your profile data is used to personalise everything automatically.
           </p>
-        </motion.div>
+        </div>
 
         {/* Price & pay */}
-        <motion.div
-          variants={fadeInUp}
+        <div
           className="mt-4 rounded-xl border border-border bg-card p-6"
         >
           <div className="flex items-center justify-between">
@@ -200,8 +192,8 @@ export function OrderContent({
           <p className="mt-3 text-center text-xs text-muted-foreground">
             Delivered to your email within {product.estimatedDelivery}. Powered by Yoco.
           </p>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

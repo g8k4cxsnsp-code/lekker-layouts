@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   Crown,
   Briefcase,
@@ -16,7 +15,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { PostComposer } from "./post-composer";
 import { PostCard } from "./post-card";
 import { UserAvatar } from "./user-avatar";
@@ -48,19 +46,15 @@ export function FeedContent({
       <div className="flex gap-6">
         {/* Main feed column */}
         <div className="flex-1 min-w-0 max-w-2xl">
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
+          <div
             className="space-y-4"
           >
-            <motion.div variants={fadeInUp}>
+            <div>
               <PostComposer onPost={handleNewPost} userProfile={profile} />
-            </motion.div>
+            </div>
 
             {localPosts.length === 0 ? (
-              <motion.div
-                variants={fadeInUp}
+              <div
                 className="rounded-2xl border-2 border-primary/20 bg-card p-12 text-center"
               >
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
@@ -80,15 +74,15 @@ export function FeedContent({
                   <Search size={16} />
                   Discover Businesses
                 </Link>
-              </motion.div>
+              </div>
             ) : (
               localPosts.map((post) => (
-                <motion.div key={post.id} variants={fadeInUp}>
+                <div key={post.id}>
                   <PostCard post={post} currentUserId={currentUserId} />
-                </motion.div>
+                </div>
               ))
             )}
-          </motion.div>
+          </div>
         </div>
 
         {/* Right sidebar */}

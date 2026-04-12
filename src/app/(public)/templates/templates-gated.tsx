@@ -2,9 +2,6 @@
 
 import Link from "next/link";
 import { Lock, ArrowRight, Sparkles, UserPlus, LogIn } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -12,8 +9,7 @@ import { cn } from "@/lib/utils";
 export function TemplatesGated() {
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         {/* Hero */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -95,9 +91,7 @@ export function TemplatesGated() {
             </div>
           </div>
         </section>
-      </main>
-      <Footer />
-      <WhatsAppButton />
+      </>
     </>
   );
 }

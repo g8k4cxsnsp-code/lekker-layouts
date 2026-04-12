@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import {
   User,
   Bell,
@@ -17,7 +16,6 @@ import {
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp } from "@/lib/animations";
 import { createClient } from "@/lib/supabase/client";
 
 export default function SettingsPage() {
@@ -42,7 +40,7 @@ export default function SettingsPage() {
 
       const { data } = await supabase
         .from("profiles")
-        .select("*")
+        .select("id, full_name, username, is_premium, premium_expires_at")
         .eq("id", user.id)
         .single();
 
@@ -113,7 +111,7 @@ export default function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6">
-      <motion.div variants={fadeInUp} initial="hidden" animate="visible">
+      <div>
         <h1 className="font-heading text-2xl font-bold text-foreground mb-6">
           Settings
         </h1>
@@ -285,7 +283,7 @@ export default function SettingsPage() {
             </div>
           </TabsContent>
         </Tabs>
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import {
   Crown,
   Search,
@@ -13,7 +12,6 @@ import {
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { createClient } from "@/lib/supabase/client";
 
 const benefits = [
@@ -116,13 +114,10 @@ export default function PremiumPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
+      <div
       >
         {/* Header */}
-        <motion.div variants={fadeInUp} className="text-center">
+        <div className="text-center">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950/30">
             <Crown size={32} className="text-amber-500" />
           </div>
@@ -132,10 +127,10 @@ export default function PremiumPage() {
           <p className="mt-2 text-muted-foreground">
             Get more visibility, save on products, and stand out from the crowd.
           </p>
-        </motion.div>
+        </div>
 
         {/* Billing toggle */}
-        <motion.div variants={fadeInUp} className="mt-8 flex items-center justify-center gap-1 rounded-full bg-muted p-1">
+        <div className="mt-8 flex items-center justify-center gap-1 rounded-full bg-muted p-1">
           <button
             onClick={() => setBilling("monthly")}
             className={cn(
@@ -161,11 +156,10 @@ export default function PremiumPage() {
               Save R988
             </span>
           </button>
-        </motion.div>
+        </div>
 
         {/* Price card */}
-        <motion.div
-          variants={fadeInUp}
+        <div
           className="mt-6 rounded-2xl border-2 border-amber-500/30 bg-card p-6 text-center"
         >
           <div className="flex items-baseline justify-center gap-1">
@@ -203,17 +197,15 @@ export default function PremiumPage() {
               )}
             </button>
           )}
-        </motion.div>
+        </div>
 
         {/* Benefits */}
-        <motion.div
-          variants={staggerContainer}
+        <div
           className="mt-8 grid gap-4 sm:grid-cols-2"
         >
           {benefits.map((benefit) => (
-            <motion.div
+            <div
               key={benefit.title}
-              variants={fadeInUp}
               className="rounded-xl border border-border bg-card p-5"
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-950/30">
@@ -225,10 +217,10 @@ export default function PremiumPage() {
               <p className="mt-1 text-xs text-muted-foreground">
                 {benefit.description}
               </p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

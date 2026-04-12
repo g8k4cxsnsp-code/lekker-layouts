@@ -1,16 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Newspaper } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
-
 export default function BlogPage() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -23,72 +17,58 @@ export default function BlogPage() {
 
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         {/* Hero */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
+            <div
               className="text-center"
             >
-              <motion.div variants={fadeIn}>
+              <div>
                 <Badge variant="outline" className="mb-4">
                   Blog
                 </Badge>
-              </motion.div>
-              <motion.h1
-                variants={fadeInUp}
+              </div>
+              <h1
                 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
               >
                 Blog
-              </motion.h1>
-              <motion.p
-                variants={fadeInUp}
+              </h1>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
               >
                 Tips, tutorials, and insights on web development, design, and
                 growing your online presence in South Africa.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* Coming Soon */}
         <section className="py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="mx-auto max-w-lg text-center"
             >
-              <motion.div
-                variants={fadeInUp}
+              <div
                 className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10"
               >
                 <Newspaper size={36} className="text-primary" />
-              </motion.div>
+              </div>
 
-              <motion.h2
-                variants={fadeInUp}
+              <h2
                 className="mt-6 font-heading text-2xl font-bold tracking-tight text-foreground"
               >
                 Coming Soon
-              </motion.h2>
-              <motion.p
-                variants={fadeInUp}
+              </h2>
+              <p
                 className="mt-4 text-muted-foreground"
               >
                 We&apos;re working on some great content. Check back soon!
-              </motion.p>
+              </p>
 
               {/* Newsletter Subscribe */}
-              <motion.div
-                variants={fadeInUp}
+              <div
                 className="mt-10 rounded-xl border border-border bg-card p-6"
               >
                 <h3 className="font-heading text-lg font-semibold text-foreground">
@@ -121,13 +101,11 @@ export default function BlogPage() {
                     </Button>
                   </form>
                 )}
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
-      </main>
-      <Footer />
-      <WhatsAppButton />
+      </>
     </>
   );
 }

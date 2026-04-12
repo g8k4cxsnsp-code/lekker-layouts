@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   ArrowRight,
   Crown,
@@ -11,7 +10,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
 import type { Product } from "@/data/products";
 
 interface AppProductsContentProps {
@@ -25,12 +23,9 @@ export function AppProductsContent({
 }: AppProductsContentProps) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
+      <div
       >
-        <motion.div variants={fadeInUp} className="mb-6">
+        <div className="mb-6">
           <h1 className="font-heading text-2xl font-bold text-foreground">
             Digital Products
           </h1>
@@ -40,11 +35,10 @@ export function AppProductsContent({
               ? " You get 15% off as a Premium member!"
               : " Go Premium for 15% off all products."}
           </p>
-        </motion.div>
+        </div>
 
         {!isPremium && (
-          <motion.div
-            variants={fadeInUp}
+          <div
             className="mb-6 flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-900/50 dark:bg-amber-950/20"
           >
             <Crown size={20} className="shrink-0 text-amber-500" />
@@ -66,13 +60,10 @@ export function AppProductsContent({
               <Crown size={14} />
               Go Premium
             </Link>
-          </motion.div>
+          </div>
         )}
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
+        <div
           className="grid gap-4 sm:grid-cols-2"
         >
           {products.map((product) => {
@@ -81,9 +72,8 @@ export function AppProductsContent({
               : null;
 
             return (
-              <motion.div
+              <div
                 key={product.id}
-                variants={fadeInUp}
                 className="group rounded-xl border border-border bg-card transition-shadow hover:shadow-md"
               >
                 <div className="p-5">
@@ -146,13 +136,12 @@ export function AppProductsContent({
                     </Link>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={fadeInUp}
+        <div
           className="mt-8 rounded-xl border border-border bg-card p-6 text-center"
         >
           <Sparkles size={24} className="mx-auto text-primary" />
@@ -163,8 +152,8 @@ export function AppProductsContent({
             Every product is generated using your business profile — your
             industry, audience, brand voice, and services. No generic templates.
           </p>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

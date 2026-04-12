@@ -15,7 +15,7 @@ export default async function ConversationPage({
 
   if (!user) redirect("/login");
 
-  // Verify user is a member of this conversation
+  // Verify membership
   const { data: membership } = await supabase
     .from("conversation_members")
     .select("conversation_id")
@@ -25,46 +25,46 @@ export default async function ConversationPage({
 
   if (!membership) notFound();
 
-  // Fetch conversation details
-  const { data: conversation } = await supabase
-    .from("conversations")
-    .select("*")
-    .eq("id", conversationId)
-    .single();
+  // Fetch conversation, messages, and members in parallel
+  const [{ data: conversation }, { data: messages }, { data: members }] =
+    await Promise.all([
+      supabase
+        .from("conversations")
+        .select("id, created_at, is_group, group_name")
+        .eq("id", conversationId)
+        .single(),
+      supabase
+        .from("messages")
+        .select(`
+          *,
+          profiles:sender_id (
+            id, username, full_name, business_name, logo_url
+          )
+        `)
+        .eq("conversation_id", conversationId)
+        .order("created_at", { ascending: true })
+        .limit(100),
+      supabase
+        .from("conversation_members")
+        .select(`
+          user_id,
+          profiles:user_id (
+            id, username, full_name, business_name, logo_url
+          )
+        `)
+        .eq("conversation_id", conversationId)
+        .neq("user_id", user.id),
+    ]);
 
   if (!conversation) notFound();
 
-  // Fetch messages
-  const { data: messages } = await supabase
-    .from("messages")
-    .select(`
-      *,
-      profiles:sender_id (
-        id, username, full_name, business_name, logo_url
-      )
-    `)
-    .eq("conversation_id", conversationId)
-    .order("created_at", { ascending: true })
-    .limit(100);
-
-  // Fetch other members for the header
-  const { data: members } = await supabase
-    .from("conversation_members")
-    .select(`
-      user_id,
-      profiles:user_id (
-        id, username, full_name, business_name, logo_url
-      )
-    `)
-    .eq("conversation_id", conversationId)
-    .neq("user_id", user.id);
-
-  // Mark as read
-  await supabase
+  // Mark as read (non-blocking)
+  supabase
     .from("conversation_members")
     .update({ last_read_at: new Date().toISOString() })
     .eq("conversation_id", conversationId)
-    .eq("user_id", user.id);
+    .eq("user_id", user.id)
+    .then(() => {});
 
   return (
     <ChatContent

@@ -3,7 +3,6 @@
 import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   CheckCircle2,
   MessageCircle,
@@ -12,11 +11,8 @@ import {
   Paintbrush,
   Rocket,
 } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
 import { products } from "@/data/products";
 import { templates } from "@/data/templates";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -53,9 +49,7 @@ function SuccessContent() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Compact payment confirmation */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
+        <div
           className="mb-8 flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-950/30"
         >
           <CheckCircle2 size={20} className="shrink-0 text-green-600 dark:text-green-400" />
@@ -67,13 +61,10 @@ function SuccessContent() {
               Order #LL-{orderId}
             </span>
           </div>
-        </motion.div>
+        </div>
 
         {/* Questionnaire heading */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
+        <div
           className="mb-8"
         >
           <h1 className="font-heading text-2xl font-bold text-foreground sm:text-3xl">
@@ -85,7 +76,7 @@ function SuccessContent() {
             emailed to <strong className="text-foreground">{email}</strong>{" "}
             {product.estimatedDelivery.toLowerCase()}.
           </p>
-        </motion.div>
+        </div>
 
         {/* Questionnaire form */}
         <QuestionnaireForm
@@ -96,16 +87,13 @@ function SuccessContent() {
         />
 
         {/* Test mode notice */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+        <div
           className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950/30"
         >
           <p className="text-center text-sm text-amber-800 dark:text-amber-200">
             This is a test transaction — no real payment was processed.
           </p>
-        </motion.div>
+        </div>
       </div>
     );
   }
@@ -116,31 +104,27 @@ function SuccessContent() {
   const whatsappUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <motion.div
-      variants={staggerContainer}
-      initial="hidden"
-      animate="visible"
+    <div
       className="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:px-8"
     >
       {/* Success icon */}
-      <motion.div variants={fadeIn} className="flex justify-center">
+      <div className="flex justify-center">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
           <CheckCircle2 size={40} className="text-green-600 dark:text-green-400" />
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div variants={fadeInUp} className="mt-8 text-center">
+      <div className="mt-8 text-center">
         <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Deposit Received!
         </h1>
         <p className="mt-3 text-lg text-muted-foreground">
           Your 50% deposit of R{depositAmount.toLocaleString()} for the {item.name} template has been confirmed.
         </p>
-      </motion.div>
+      </div>
 
       {/* Order details card */}
-      <motion.div
-        variants={fadeInUp}
+      <div
         className="mt-8 rounded-xl border border-border bg-card p-6"
       >
         <div className="flex items-center justify-between border-b border-border pb-4">
@@ -167,10 +151,10 @@ function SuccessContent() {
           <span className="text-sm text-muted-foreground">Confirmation sent to</span>
           <span className="text-sm text-foreground">{email}</span>
         </div>
-      </motion.div>
+      </div>
 
       {/* Template: Next steps */}
-      <motion.div variants={fadeInUp} className="mt-8">
+      <div className="mt-8">
         <h2 className="font-heading text-lg font-semibold text-foreground">
           What Happens Next
         </h2>
@@ -211,10 +195,10 @@ function SuccessContent() {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* WhatsApp CTA */}
-      <motion.div variants={fadeIn} className="mt-8 flex flex-col gap-3">
+      <div className="mt-8 flex flex-col gap-3">
         <a
           href={whatsappUrl}
           target="_blank"
@@ -231,26 +215,24 @@ function SuccessContent() {
           Continue Browsing
           <ArrowRight size={16} />
         </Link>
-      </motion.div>
+      </div>
 
       {/* Test mode notice */}
-      <motion.div
-        variants={fadeIn}
+      <div
         className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950/30"
       >
         <p className="text-center text-sm text-amber-800 dark:text-amber-200">
           This is a test transaction — no real payment was processed.
         </p>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 
 export default function CheckoutSuccessPage() {
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         <Suspense
           fallback={
             <div className="flex items-center justify-center py-32">
@@ -260,8 +242,7 @@ export default function CheckoutSuccessPage() {
         >
           <SuccessContent />
         </Suspense>
-      </main>
-      <Footer />
+      </>
     </>
   );
 }

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import {
   MapPin,
@@ -19,7 +18,6 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { PostCard } from "@/components/app/post-card";
 import { ConnectionButton } from "@/components/app/connection-button";
 import { UserAvatar } from "@/components/app/user-avatar";
@@ -57,14 +55,10 @@ export function ProfileContent({
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
+      <div
       >
         {/* Profile header */}
-        <motion.div
-          variants={fadeInUp}
+        <div
           className="rounded-xl border border-border bg-card p-6"
         >
           <div className="flex items-start gap-4">
@@ -164,10 +158,10 @@ export function ProfileContent({
               </>
             )}
           </div>
-        </motion.div>
+        </div>
 
         {/* Tabs */}
-        <motion.div variants={fadeInUp} className="mt-6">
+        <div className="mt-6">
           <Tabs defaultValue="about">
             <TabsList variant="line" className="w-full">
               <TabsTrigger value="about">About</TabsTrigger>
@@ -297,8 +291,8 @@ export function ProfileContent({
               )}
             </TabsContent>
           </Tabs>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

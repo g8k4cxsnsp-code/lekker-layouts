@@ -1,10 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { CheckCircle2, Clock, Mail, MessageCircle, Sparkles } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { popIn, fadeInUp, staggerContainer } from "@/lib/animations";
 import { SITE_CONFIG } from "@/lib/constants";
 import type { Product } from "@/data/products";
 import Link from "next/link";
@@ -21,31 +19,27 @@ export function QuestionnaireSubmitted({ product, email }: QuestionnaireSubmitte
   const whatsappUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${whatsappMessage}`;
 
   return (
-    <motion.div
-      variants={staggerContainer}
-      initial="hidden"
-      animate="visible"
+    <div
       className="text-center"
     >
-      <motion.div variants={popIn} className="flex justify-center">
+      <div className="flex justify-center">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
           <CheckCircle2 size={40} className="text-green-600 dark:text-green-400" />
         </div>
-      </motion.div>
+      </div>
 
-      <motion.h2
-        variants={fadeInUp}
+      <h2
         className="mt-6 font-heading text-2xl font-bold text-foreground sm:text-3xl"
       >
         Your personalised {product.name} is being created!
-      </motion.h2>
+      </h2>
 
-      <motion.p variants={fadeInUp} className="mt-3 text-muted-foreground">
+      <p className="mt-3 text-muted-foreground">
         You&apos;ll receive your results at <strong className="text-foreground">{email}</strong>
-      </motion.p>
+      </p>
 
       {/* Timeline */}
-      <motion.div variants={fadeInUp} className="mt-8 space-y-4">
+      <div className="mt-8 space-y-4">
         {[
           {
             icon: <Sparkles size={18} />,
@@ -78,10 +72,10 @@ export function QuestionnaireSubmitted({ product, email }: QuestionnaireSubmitte
             </div>
           </div>
         ))}
-      </motion.div>
+      </div>
 
       {/* Actions */}
-      <motion.div variants={fadeInUp} className="mt-8 flex flex-col gap-3">
+      <div className="mt-8 flex flex-col gap-3">
         <a
           href={whatsappUrl}
           target="_blank"
@@ -97,7 +91,7 @@ export function QuestionnaireSubmitted({ product, email }: QuestionnaireSubmitte
         >
           Browse More Products
         </Link>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

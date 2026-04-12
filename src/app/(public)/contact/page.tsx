@@ -2,11 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight, Mail, MapPin, Phone, MessageCircle } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -15,8 +11,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/constants";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
-
 interface ContactFormData {
   name: string;
   email: string;
@@ -117,51 +111,41 @@ export default function ContactPage() {
 
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         {/* Hero */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
+            <div
               className="text-center"
             >
-              <motion.div variants={fadeIn}>
+              <div>
                 <Badge variant="outline" className="mb-4">
                   Contact
                 </Badge>
-              </motion.div>
-              <motion.h1
-                variants={fadeInUp}
+              </div>
+              <h1
                 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
               >
                 Get in Touch
-              </motion.h1>
-              <motion.p
-                variants={fadeInUp}
+              </h1>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
               >
                 Ready to start your project? Have a question? Drop us a message
                 and we&apos;ll get back to you within 24 hours.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* Contact Form + Sidebar */}
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="grid gap-12 lg:grid-cols-3"
             >
               {/* Form */}
-              <motion.div variants={fadeInUp} className="lg:col-span-2">
+              <div className="lg:col-span-2">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
@@ -259,10 +243,10 @@ export default function ContactPage() {
                     {!isSubmitting && <ArrowRight size={16} />}
                   </Button>
                 </form>
-              </motion.div>
+              </div>
 
               {/* Sidebar */}
-              <motion.div variants={fadeInUp} className="space-y-8">
+              <div className="space-y-8">
                 {/* Contact Info */}
                 <div className="rounded-xl border border-border bg-card p-6">
                   <h3 className="font-heading text-lg font-semibold text-foreground">
@@ -316,13 +300,11 @@ export default function ContactPage() {
                     Chat on WhatsApp
                   </a>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
-      </main>
-      <Footer />
-      <WhatsAppButton />
+      </>
     </>
   );
 }

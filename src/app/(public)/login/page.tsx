@@ -3,13 +3,9 @@
 import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
 import { LogIn, AlertCircle, ArrowRight } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { signIn } from "@/lib/actions/auth";
 
 export default function LoginPage() {
@@ -46,36 +42,29 @@ function LoginContent() {
 
   return (
     <>
-      <Navbar />
-      <main className="flex-1 flex items-center justify-center px-4 py-16">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
+      <div className="flex-1 flex items-center justify-center px-4 py-16">
+        <div
           className="w-full max-w-md"
         >
-          <motion.div variants={fadeInUp} className="text-center mb-8">
+          <div className="text-center mb-8">
             <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground">
               Welcome back
             </h1>
             <p className="mt-2 text-muted-foreground">
               Log in to your Lekker Layouts account
             </p>
-          </motion.div>
+          </div>
 
           {error && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
+            <div
               className="mb-6 flex items-center gap-3 rounded-lg border border-destructive/30 bg-destructive/5 p-4"
             >
               <AlertCircle size={18} className="shrink-0 text-destructive" />
               <p className="text-sm text-destructive">{error}</p>
-            </motion.div>
+            </div>
           )}
 
-          <motion.form
-            variants={fadeInUp}
+          <form
             onSubmit={handleSubmit}
             className="space-y-5"
           >
@@ -132,18 +121,17 @@ function LoginContent() {
                 </>
               )}
             </button>
-          </motion.form>
+          </form>
 
-          <motion.p variants={fadeInUp} className="mt-6 text-center text-sm text-muted-foreground">
+          <p className="mt-6 text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
             <Link href="/register" className="font-medium text-primary hover:underline">
               Join free
               <ArrowRight size={14} className="ml-1 inline" />
             </Link>
-          </motion.p>
-        </motion.div>
-      </main>
-      <Footer />
+          </p>
+        </div>
+      </div>
     </>
   );
 }

@@ -2,12 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import { ArrowLeft, Save, Loader2, Camera } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp } from "@/lib/animations";
 import { QuestionnaireSection } from "@/components/questionnaire/questionnaire-section";
 import { createClient } from "@/lib/supabase/client";
 import { UserAvatar } from "@/components/app/user-avatar";
@@ -265,7 +263,7 @@ export default function ProfileEditPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6">
-      <motion.div variants={fadeInUp} initial="hidden" animate="visible">
+      <div>
         <div className="flex items-center gap-3 mb-6">
           <Link
             href="/profile"
@@ -402,7 +400,7 @@ export default function ProfileEditPage() {
             Save Changes
           </button>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

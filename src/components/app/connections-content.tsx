@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import {
   UserPlus,
   UserCheck,
@@ -19,7 +18,6 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
 import {
   acceptConnectionRequest,
   declineConnectionRequest,
@@ -97,34 +95,30 @@ export function ConnectionsContent({
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
+      <div
       >
-        <motion.div variants={fadeInUp} className="mb-6">
+        <div className="mb-6">
           <h1 className="font-heading text-2xl font-bold text-foreground">
             My Network
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Manage your connections and requests
           </p>
-        </motion.div>
+        </div>
 
         {/* Pending requests banner */}
         {received.length > 0 && (
-          <motion.div
-            variants={fadeInUp}
+          <div
             className="mb-6 rounded-xl border border-primary/20 bg-primary/5 p-4"
           >
             <div className="flex items-center gap-2 text-sm font-medium text-primary">
               <UserPlus size={16} />
               {received.length} pending connection{received.length !== 1 ? "s" : ""} request{received.length !== 1 ? "s" : ""}
             </div>
-          </motion.div>
+          </div>
         )}
 
-        <motion.div variants={fadeInUp}>
+        <div>
           <Tabs defaultValue={received.length > 0 ? "received" : "connections"}>
             <TabsList variant="line" className="w-full">
               <TabsTrigger value="received" className="gap-1.5">
@@ -268,8 +262,8 @@ export function ConnectionsContent({
               )}
             </TabsContent>
           </Tabs>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

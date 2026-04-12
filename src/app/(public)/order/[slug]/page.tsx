@@ -1,8 +1,6 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { products } from "@/data/products";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
 import { OrderFlow } from "./order-flow";
 
 interface OrderPageProps {
@@ -19,13 +17,11 @@ export default async function OrderPage({ params }: OrderPageProps) {
 
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         <Suspense>
           <OrderFlow product={product} />
         </Suspense>
-      </main>
-      <Footer />
+      </>
     </>
   );
 }

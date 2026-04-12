@@ -2,9 +2,6 @@
 
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -17,8 +14,7 @@ interface TemplateDetailContentProps {
 export function TemplateDetailContent({ template }: TemplateDetailContentProps) {
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         {/* Hero */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -121,9 +117,7 @@ export function TemplateDetailContent({ template }: TemplateDetailContentProps) 
             </div>
           </div>
         </section>
-      </main>
-      <Footer />
-      <WhatsAppButton />
+      </>
     </>
   );
 }

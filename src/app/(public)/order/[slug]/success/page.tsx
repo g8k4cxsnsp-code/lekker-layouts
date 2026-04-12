@@ -3,7 +3,6 @@
 import { Suspense } from "react";
 import { useSearchParams, useParams } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   CheckCircle2,
   Sparkles,
@@ -12,11 +11,8 @@ import {
   MessageCircle,
   ArrowRight,
 } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeIn, fadeInUp, staggerContainer, popIn } from "@/lib/animations";
 import { products } from "@/data/products";
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -48,20 +44,17 @@ function SuccessContent() {
   const whatsappUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${whatsappMessage}`;
 
   return (
-    <motion.div
-      variants={staggerContainer}
-      initial="hidden"
-      animate="visible"
+    <div
       className="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:px-8"
     >
       {/* Success icon */}
-      <motion.div variants={popIn} className="flex justify-center">
+      <div className="flex justify-center">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
           <CheckCircle2 size={40} className="text-green-600 dark:text-green-400" />
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div variants={fadeInUp} className="mt-8 text-center">
+      <div className="mt-8 text-center">
         <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Payment Confirmed!
         </h1>
@@ -73,22 +66,21 @@ function SuccessContent() {
             Order <span className="font-mono font-medium text-foreground">#LL-{orderId}</span>
           </p>
         )}
-      </motion.div>
+      </div>
 
       {/* Expired notice */}
       {status === "expired" && (
-        <motion.div
-          variants={fadeIn}
+        <div
           className="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950/30"
         >
           <p className="text-center text-sm text-amber-800 dark:text-amber-200">
             Your payment was confirmed but the session timed out. WhatsApp us with your order number if you don&apos;t receive your email within 30 minutes.
           </p>
-        </motion.div>
+        </div>
       )}
 
       {/* Timeline */}
-      <motion.div variants={fadeInUp} className="mt-8 space-y-4">
+      <div className="mt-8 space-y-4">
         {[
           {
             icon: <Sparkles size={18} />,
@@ -121,10 +113,10 @@ function SuccessContent() {
             </div>
           </div>
         ))}
-      </motion.div>
+      </div>
 
       {/* Actions */}
-      <motion.div variants={fadeInUp} className="mt-8 flex flex-col gap-3">
+      <div className="mt-8 flex flex-col gap-3">
         <a
           href={whatsappUrl}
           target="_blank"
@@ -141,16 +133,15 @@ function SuccessContent() {
           Browse More Products
           <ArrowRight size={16} />
         </Link>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 
 export default function OrderSuccessPage() {
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         <Suspense
           fallback={
             <div className="flex items-center justify-center py-32">
@@ -160,8 +151,7 @@ export default function OrderSuccessPage() {
         >
           <SuccessContent />
         </Suspense>
-      </main>
-      <Footer />
+      </>
     </>
   );
 }

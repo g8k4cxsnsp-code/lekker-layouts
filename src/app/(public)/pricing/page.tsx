@@ -1,11 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -15,8 +11,6 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
-
 interface PricingTier {
   name: string;
   price: string;
@@ -122,53 +116,42 @@ const faqItems: FAQItem[] = [
 export default function PricingPage() {
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         {/* Hero */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
+            <div
               className="text-center"
             >
-              <motion.div variants={fadeIn}>
+              <div>
                 <Badge variant="outline" className="mb-4">
                   Pricing
                 </Badge>
-              </motion.div>
-              <motion.h1
-                variants={fadeInUp}
+              </div>
+              <h1
                 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
               >
                 Simple, Transparent Pricing
-              </motion.h1>
-              <motion.p
-                variants={fadeInUp}
+              </h1>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
               >
                 No hidden fees. No surprises. Choose the plan that fits your
                 business needs and budget.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* Pricing Cards */}
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+            <div
               className="grid gap-8 lg:grid-cols-3"
             >
               {pricingTiers.map((tier) => (
-                <motion.div
+                <div
                   key={tier.name}
-                  variants={fadeInUp}
                   className={cn(
                     "relative overflow-hidden rounded-xl border bg-card p-8 transition-all",
                     tier.highlighted
@@ -226,46 +209,36 @@ export default function PricingPage() {
                     Get Started
                     <ArrowRight size={18} />
                   </Link>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* FAQ */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="text-center"
             >
-              <motion.div variants={fadeIn}>
+              <div>
                 <Badge variant="outline" className="mb-4">
                   FAQ
                 </Badge>
-              </motion.div>
-              <motion.h2
-                variants={fadeInUp}
+              </div>
+              <h2
                 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
               >
                 Frequently Asked Questions
-              </motion.h2>
-              <motion.p
-                variants={fadeInUp}
+              </h2>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-muted-foreground"
               >
                 Got questions? We&apos;ve got answers.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
 
-            <motion.div
-              variants={fadeInUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="mt-12"
             >
               <Accordion>
@@ -280,12 +253,10 @@ export default function PricingPage() {
                   </AccordionItem>
                 ))}
               </Accordion>
-            </motion.div>
+            </div>
           </div>
         </section>
-      </main>
-      <Footer />
-      <WhatsAppButton />
+      </>
     </>
   );
 }

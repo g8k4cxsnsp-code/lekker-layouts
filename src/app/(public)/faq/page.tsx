@@ -2,16 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
-
 interface FAQItem {
   question: string;
   answer: string;
@@ -79,53 +73,42 @@ export default function FAQPage() {
 
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         {/* Hero */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
+            <div
               className="text-center"
             >
-              <motion.div variants={fadeIn}>
+              <div>
                 <Badge variant="outline" className="mb-4">
                   FAQ
                 </Badge>
-              </motion.div>
-              <motion.h1
-                variants={fadeInUp}
+              </div>
+              <h1
                 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
               >
                 Frequently Asked Questions
-              </motion.h1>
-              <motion.p
-                variants={fadeInUp}
+              </h1>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
               >
                 Got questions? We&apos;ve got answers. If you can&apos;t find
                 what you&apos;re looking for, feel free to reach out.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* FAQ List */}
         <section className="py-16">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="space-y-4"
             >
               {faqs.map((faq, index) => (
-                <motion.div
+                <div
                   key={index}
-                  variants={fadeInUp}
                   className="rounded-xl border border-border bg-card"
                 >
                   <button
@@ -135,74 +118,58 @@ export default function FAQPage() {
                     <span className="font-heading text-base font-semibold text-foreground">
                       {faq.question}
                     </span>
-                    <motion.div
-                      animate={{ rotate: openIndex === index ? 180 : 0 }}
-                      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                    <div
                     >
                       <ChevronDown
                         size={20}
                         className="shrink-0 text-muted-foreground"
                       />
-                    </motion.div>
+                    </div>
                   </button>
-                  <AnimatePresence initial={false}>
-                    {openIndex === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                  {openIndex === index && (
+                      <div
                         className="overflow-hidden"
                       >
                         <p className="px-6 pb-5 text-sm text-muted-foreground leading-relaxed">
                           {faq.answer}
                         </p>
-                      </motion.div>
+                      </div>
                     )}
-                  </AnimatePresence>
-                </motion.div>
+                  </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* CTA */}
         <section className="bg-muted/30 py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="text-center"
             >
-              <motion.h2
-                variants={fadeInUp}
+              <h2
                 className="font-heading text-3xl font-bold tracking-tight text-foreground"
               >
                 Still Have Questions?
-              </motion.h2>
-              <motion.p
-                variants={fadeInUp}
+              </h2>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-muted-foreground"
               >
                 We&apos;re here to help. Drop us a message and we&apos;ll get
                 back to you as soon as possible.
-              </motion.p>
-              <motion.div variants={fadeInUp} className="mt-8">
+              </p>
+              <div className="mt-8">
                 <Link
                   href="/contact"
                   className={buttonVariants({ size: "lg" })}
                 >
                   Contact Us
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
-      </main>
-      <Footer />
-      <WhatsAppButton />
+      </>
     </>
   );
 }

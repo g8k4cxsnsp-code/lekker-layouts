@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   ArrowRight,
   Code2,
@@ -12,14 +11,9 @@ import {
   Rocket,
   CheckCircle2,
 } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
-
 interface Service {
   icon: React.ReactNode;
   title: string;
@@ -113,54 +107,43 @@ const processSteps: ProcessStep[] = [
 export default function ServicesPage() {
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         {/* Hero */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
+            <div
               className="text-center"
             >
-              <motion.div variants={fadeIn}>
+              <div>
                 <Badge variant="outline" className="mb-4">
                   Our Services
                 </Badge>
-              </motion.div>
-              <motion.h1
-                variants={fadeInUp}
+              </div>
+              <h1
                 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
               >
                 Everything You Need to Go Online
-              </motion.h1>
-              <motion.p
-                variants={fadeInUp}
+              </h1>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
               >
                 From custom websites to ongoing maintenance and digital
                 products, we provide end-to-end solutions for South African
                 businesses.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* Services Detail */}
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+            <div
               className="space-y-16"
             >
               {services.map((service, index) => (
-                <motion.div
+                <div
                   key={service.title}
-                  variants={fadeInUp}
                   className={cn(
                     "grid gap-8 lg:grid-cols-2 lg:items-center",
                     index % 2 !== 0 && "lg:grid-flow-dense"
@@ -204,53 +187,42 @@ export default function ServicesPage() {
                       </p>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* Process */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="text-center"
             >
-              <motion.div variants={fadeIn}>
+              <div>
                 <Badge variant="outline" className="mb-4">
                   How It Works
                 </Badge>
-              </motion.div>
-              <motion.h2
-                variants={fadeInUp}
+              </div>
+              <h2
                 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
               >
                 Our Process
-              </motion.h2>
-              <motion.p
-                variants={fadeInUp}
+              </h2>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-muted-foreground"
               >
                 From first contact to launch, here&apos;s how we work together
                 to bring your website to life.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
 
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+            <div
               className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4"
             >
               {processSteps.map((step) => (
-                <motion.div
+                <div
                   key={step.step}
-                  variants={fadeInUp}
                   className="relative rounded-xl border border-border bg-card p-6 text-center transition-all hover:border-primary/30 hover:shadow-lg"
                 >
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground">
@@ -265,36 +237,30 @@ export default function ServicesPage() {
                   <p className="mt-2 text-sm text-muted-foreground">
                     {step.description}
                   </p>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* CTA */}
         <section className="py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="rounded-2xl bg-primary px-8 py-16 text-center text-primary-foreground sm:px-16"
             >
-              <motion.h2
-                variants={fadeInUp}
+              <h2
                 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl"
               >
                 Ready to Get Started?
-              </motion.h2>
-              <motion.p
-                variants={fadeInUp}
+              </h2>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-primary-foreground/80"
               >
                 Let&apos;s build something great together. Get in touch and
                 we&apos;ll have your website up and running in no time.
-              </motion.p>
-              <motion.div variants={fadeIn} className="mt-8">
+              </p>
+              <div className="mt-8">
                 <Link
                   href="/contact"
                   className={cn(
@@ -305,13 +271,11 @@ export default function ServicesPage() {
                   Contact Us
                   <ArrowRight size={18} />
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
-      </main>
-      <Footer />
-      <WhatsAppButton />
+      </>
     </>
   );
 }

@@ -3,9 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Clock, ShoppingBag, Target, Sparkles, Zap } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -16,9 +13,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
-        {/* Hero */}
+      {/* Hero */}
         <section className="relative overflow-hidden bg-muted/30 py-20">
           <div className="absolute inset-0 -z-10">
             <div className="absolute -right-40 top-0 h-[400px] w-[400px] rounded-full bg-primary/[0.05] blur-[100px]" />
@@ -187,9 +182,6 @@ export default function ProductsPage() {
             </div>
           </div>
         </section>
-      </main>
-      <Footer />
-      <WhatsAppButton />
     </>
   );
 }

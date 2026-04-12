@@ -3,14 +3,10 @@
 import { useState, Suspense } from "react";
 import { useSearchParams, useRouter, redirect } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowLeft, CreditCard, Lock, ShieldCheck } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
 import { products } from "@/data/products";
 import { templates } from "@/data/templates";
 
@@ -69,13 +65,10 @@ function CheckoutForm() {
   };
 
   return (
-    <motion.div
-      variants={staggerContainer}
-      initial="hidden"
-      animate="visible"
+    <div
       className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8"
     >
-      <motion.div variants={fadeIn}>
+      <div>
         <Link
           href={`/templates/${slug}`}
           className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -83,20 +76,19 @@ function CheckoutForm() {
           <ArrowLeft size={16} />
           Back to {item.name}
         </Link>
-      </motion.div>
+      </div>
 
-      <motion.div variants={fadeInUp}>
+      <div>
         <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground">
           Checkout
         </h1>
         <Badge variant="outline" className="mt-2">
           50% Deposit
         </Badge>
-      </motion.div>
+      </div>
 
       {/* Order Summary */}
-      <motion.div
-        variants={fadeInUp}
+      <div
         className="mt-8 rounded-xl border border-border bg-card p-6"
       >
         <h2 className="font-heading text-sm font-semibold uppercase tracking-wider text-muted-foreground">
@@ -121,11 +113,10 @@ function CheckoutForm() {
             </p>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Payment Form */}
-      <motion.form
-        variants={fadeInUp}
+      <form
         onSubmit={handleSubmit}
         className="mt-8 space-y-6"
       >
@@ -252,16 +243,15 @@ function CheckoutForm() {
         <p className="text-center text-xs text-muted-foreground">
           You&apos;re paying a 50% deposit. The remaining balance is due on delivery of your branded website.
         </p>
-      </motion.form>
-    </motion.div>
+      </form>
+    </div>
   );
 }
 
 export default function CheckoutPage() {
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         <Suspense
           fallback={
             <div className="flex items-center justify-center py-32">
@@ -271,8 +261,7 @@ export default function CheckoutPage() {
         >
           <CheckoutForm />
         </Suspense>
-      </main>
-      <Footer />
+      </>
     </>
   );
 }

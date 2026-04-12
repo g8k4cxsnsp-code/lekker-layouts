@@ -1,15 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Code, Zap, BadgeCheck, HeartHandshake, Users } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
-
 const values = [
   {
     icon: Code,
@@ -40,67 +34,54 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         {/* Hero */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
+            <div
               className="text-center"
             >
-              <motion.div variants={fadeIn}>
+              <div>
                 <Badge variant="outline" className="mb-4">
                   About Us
                 </Badge>
-              </motion.div>
-              <motion.h1
-                variants={fadeInUp}
+              </div>
+              <h1
                 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
               >
                 Our Story
-              </motion.h1>
-              <motion.p
-                variants={fadeInUp}
+              </h1>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
               >
                 Lekker Layouts is a South African web development studio on a
                 mission to make professional websites accessible to every small
                 business in the country.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* Story */}
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="mx-auto max-w-3xl space-y-6 text-center"
             >
-              <motion.h2
-                variants={fadeInUp}
+              <h2
                 className="font-heading text-3xl font-bold tracking-tight text-foreground"
               >
                 Why We Started
-              </motion.h2>
-              <motion.p
-                variants={fadeInUp}
+              </h2>
+              <p
                 className="text-muted-foreground leading-relaxed"
               >
                 Too many South African small businesses are held back by
                 expensive, slow, and outdated websites. We saw talented
                 entrepreneurs stuck with cookie-cutter page builders or paying
                 huge agency fees for simple sites. There had to be a better way.
-              </motion.p>
-              <motion.p
-                variants={fadeInUp}
+              </p>
+              <p
                 className="text-muted-foreground leading-relaxed"
               >
                 Lekker Layouts was born from a simple idea: deliver hand-coded,
@@ -109,56 +90,44 @@ export default function AboutPage() {
                 leading tech companies — Next.js, React, and Tailwind CSS —
                 giving our clients enterprise-grade performance without the
                 enterprise price tag.
-              </motion.p>
-              <motion.p
-                variants={fadeInUp}
+              </p>
+              <p
                 className="text-muted-foreground leading-relaxed"
               >
                 Based right here in South Africa, we understand the unique
                 challenges local businesses face. From load-shedding-proof
                 hosting to mobile-first design for data-conscious users, we
                 build with our market in mind.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* Values */}
         <section className="bg-muted/30 py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="text-center"
             >
-              <motion.h2
-                variants={fadeInUp}
+              <h2
                 className="font-heading text-3xl font-bold tracking-tight text-foreground"
               >
                 What We Stand For
-              </motion.h2>
-              <motion.p
-                variants={fadeInUp}
+              </h2>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-muted-foreground"
               >
                 Our values guide every decision we make, from the code we write
                 to the way we support our clients.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
 
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
             >
               {values.map((value) => (
-                <motion.div
+                <div
                   key={value.title}
-                  variants={fadeInUp}
                   className="rounded-xl border border-border bg-card p-6 text-center"
                 >
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
@@ -170,48 +139,37 @@ export default function AboutPage() {
                   <p className="mt-2 text-sm text-muted-foreground">
                     {value.description}
                   </p>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* Team Placeholder */}
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="text-center"
             >
-              <motion.h2
-                variants={fadeInUp}
+              <h2
                 className="font-heading text-3xl font-bold tracking-tight text-foreground"
               >
                 Meet the Team
-              </motion.h2>
-              <motion.p
-                variants={fadeInUp}
+              </h2>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-muted-foreground"
               >
                 A small but mighty crew of developers and designers passionate
                 about the South African digital landscape.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
 
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
             >
               {[1, 2, 3].map((i) => (
-                <motion.div
+                <div
                   key={i}
-                  variants={fadeInUp}
                   className="flex flex-col items-center rounded-xl border border-border bg-card p-8"
                 >
                   <div className="flex h-24 w-24 items-center justify-center rounded-full bg-muted">
@@ -225,49 +183,41 @@ export default function AboutPage() {
                     Bio coming soon. We&apos;re building something great behind
                     the scenes.
                   </p>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* CTA */}
         <section className="bg-muted/30 py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+            <div
               className="text-center"
             >
-              <motion.h2
-                variants={fadeInUp}
+              <h2
                 className="font-heading text-3xl font-bold tracking-tight text-foreground"
               >
                 Ready to Work Together?
-              </motion.h2>
-              <motion.p
-                variants={fadeInUp}
+              </h2>
+              <p
                 className="mx-auto mt-4 max-w-2xl text-muted-foreground"
               >
                 Let&apos;s chat about how we can help your business stand out
                 online. No pressure, no jargon — just honest advice.
-              </motion.p>
-              <motion.div variants={fadeInUp} className="mt-8">
+              </p>
+              <div className="mt-8">
                 <Link
                   href="/contact"
                   className={buttonVariants({ size: "lg" })}
                 >
                   Get in Touch
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
-      </main>
-      <Footer />
-      <WhatsAppButton />
+      </>
     </>
   );
 }

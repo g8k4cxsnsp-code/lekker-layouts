@@ -3,9 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ExternalLink, Sparkles } from "lucide-react";
-import { Navbar } from "@/components/ui/navbar";
-import { Footer } from "@/components/ui/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { TemplatePreviewFrame } from "@/components/ui/template-preview-frame";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -33,8 +30,7 @@ export function TemplatesAuthenticated({ profile }: TemplatesAuthenticatedProps)
 
   return (
     <>
-      <Navbar />
-      <main className="flex-1">
+      <>
         {/* Hero */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -161,9 +157,7 @@ export function TemplatesAuthenticated({ profile }: TemplatesAuthenticatedProps)
             )}
           </div>
         </section>
-      </main>
-      <Footer />
-      <WhatsAppButton />
+      </>
     </>
   );
 }

@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Search, MapPin, Crown, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { UserAvatar } from "@/components/app/user-avatar";
 
 interface DiscoverContentProps {
@@ -46,22 +44,19 @@ export function DiscoverContent({ profiles }: DiscoverContentProps) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
+      <div
       >
-        <motion.div variants={fadeInUp}>
+        <div>
           <h1 className="font-heading text-2xl font-bold text-foreground">
             Discover Businesses
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Find and connect with South African business owners
           </p>
-        </motion.div>
+        </div>
 
         {/* Search */}
-        <motion.div variants={fadeInUp} className="mt-6">
+        <div className="mt-6">
           <div className="relative">
             <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input
@@ -72,10 +67,10 @@ export function DiscoverContent({ profiles }: DiscoverContentProps) {
               className="w-full rounded-lg border border-input bg-background pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30"
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* Industry filter */}
-        <motion.div variants={fadeInUp} className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap gap-2">
           {industries.map((industry) => (
             <button
               key={industry}
@@ -90,15 +85,14 @@ export function DiscoverContent({ profiles }: DiscoverContentProps) {
               {industry}
             </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Results */}
-        <motion.div
-          variants={staggerContainer}
+        <div
           className="mt-6 grid gap-4 sm:grid-cols-2"
         >
           {filtered.map((profile) => (
-            <motion.div key={profile.id} variants={fadeInUp}>
+            <div key={profile.id}>
               <Link
                 href={`/profile/${profile.username || profile.id}`}
                 className="block rounded-2xl border-2 border-primary/15 bg-card p-5 transition-all hover:border-primary/30 hover:shadow-md"
@@ -141,19 +135,18 @@ export function DiscoverContent({ profiles }: DiscoverContentProps) {
                   </div>
                 )}
               </Link>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {filtered.length === 0 && (
-          <motion.div
-            variants={fadeInUp}
+          <div
             className="mt-8 rounded-2xl border-2 border-primary/20 bg-card p-12 text-center"
           >
             <p className="text-muted-foreground">No businesses found matching your search.</p>
-          </motion.div>
+          </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 }

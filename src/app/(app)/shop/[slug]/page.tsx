@@ -21,7 +21,7 @@ export default async function OrderPage({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("*")
+    .select("id, profile_completed, is_premium")
     .eq("id", user.id)
     .single();
 
