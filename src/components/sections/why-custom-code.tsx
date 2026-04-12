@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Search, Users, MessageCircle, Crown, ShoppingBag, TrendingUp, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeIn, fadeInUp, staggerContainerFast } from "@/lib/animations";
 
 const benefits = [
   {
@@ -54,46 +52,24 @@ export function WhyCustomCode() {
         <div className="absolute left-0 top-1/3 h-[400px] w-[400px] rounded-full bg-primary/[0.03] blur-[100px]" />
       </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={staggerContainerFast}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center"
-        >
-          <motion.div variants={fadeIn}>
-            <Badge variant="outline" className="mb-4">
-              Platform Features
-            </Badge>
-          </motion.div>
-          <motion.h2
-            variants={fadeInUp}
-            className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
-          >
+        <div className="text-center">
+          <Badge variant="outline" className="mb-4">
+            Platform Features
+          </Badge>
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             Everything You Need to Grow
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground"
-          >
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
             One platform to connect, communicate, and build your business
             presence online. Built specifically for SA entrepreneurs.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        <motion.div
-          variants={staggerContainerFast}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-        >
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit) => (
-            <motion.div
+            <div
               key={benefit.title}
-              variants={fadeInUp}
-              whileHover={{ y: -4 }}
-              className="group rounded-2xl border-2 border-primary/20 bg-card p-7 transition-all hover:border-primary/40 hover:shadow-md"
+              className="group rounded-2xl border-2 border-primary/20 bg-card p-7 transition-all hover:border-primary/40 hover:shadow-md card-hover"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-transform group-hover:scale-110">
                 {benefit.icon}
@@ -104,17 +80,11 @@ export function WhyCustomCode() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {benefit.description}
               </p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-12 text-center"
-        >
+        <div className="mt-12 text-center">
           <Link
             href="/register"
             className={cn(
@@ -125,7 +95,7 @@ export function WhyCustomCode() {
             Get Started Free
             <ArrowRight size={18} />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

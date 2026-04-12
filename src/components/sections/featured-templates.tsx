@@ -1,14 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { TemplatePreviewFrame } from "@/components/ui/template-preview-frame";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { templates } from "@/data/templates";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
 
 export function FeaturedTemplates() {
   const featured = templates.filter((t) => t.isActive).slice(0, 3);
@@ -16,44 +14,23 @@ export function FeaturedTemplates() {
   return (
     <section className="bg-muted/30 py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center"
-        >
-          <motion.div variants={fadeIn}>
-            <Badge variant="outline" className="mb-4">
-              Business Tools
-            </Badge>
-          </motion.div>
-          <motion.h2
-            variants={fadeInUp}
-            className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
-          >
+        <div className="text-center">
+          <Badge variant="outline" className="mb-4">
+            Business Tools
+          </Badge>
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             Launch Your Online Presence
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground"
-          >
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
             Need a website? Browse our ready-made templates — pick one, we
             personalise it to your brand, and you&apos;re live in days.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-        >
+        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {featured.map((template) => (
-            <motion.div
+            <div
               key={template.id}
-              variants={fadeInUp}
               className="card-hover group relative overflow-hidden rounded-2xl border border-border/60 bg-card"
             >
               {/* Thumbnail */}
@@ -114,17 +91,11 @@ export function FeaturedTemplates() {
                   <ArrowRight size={16} />
                 </Link>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-14 text-center"
-        >
+        <div className="mt-14 text-center">
           <Link
             href="/templates"
             className={cn(
@@ -135,7 +106,7 @@ export function FeaturedTemplates() {
             Browse All Templates
             <ArrowRight size={18} />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

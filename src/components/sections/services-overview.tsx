@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Users, Crown, ShoppingBag, ArrowRight, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
 
 const offerings = [
   {
@@ -67,46 +65,24 @@ export function ServicesOverview() {
   return (
     <section className="relative overflow-hidden py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center"
-        >
-          <motion.div variants={fadeIn}>
-            <Badge variant="outline" className="mb-4">
-              Membership
-            </Badge>
-          </motion.div>
-          <motion.h2
-            variants={fadeInUp}
-            className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
-          >
+        <div className="text-center">
+          <Badge variant="outline" className="mb-4">
+            Membership
+          </Badge>
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             Choose Your Path
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground"
-          >
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
             Start free and upgrade when you&apos;re ready. No lock-in, no hidden fees.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="mt-16 grid gap-8 lg:grid-cols-3"
-        >
+        <div className="mt-16 grid gap-8 lg:grid-cols-3">
           {offerings.map((item) => (
-            <motion.div
+            <div
               key={item.title}
-              variants={fadeInUp}
-              whileHover={{ y: -6 }}
               className={cn(
-                "relative flex flex-col rounded-2xl border-2 p-8 transition-shadow hover:shadow-lg",
+                "relative flex flex-col rounded-2xl border-2 p-8 transition-shadow hover:shadow-lg card-hover",
                 item.highlight
                   ? "border-primary/30 bg-primary text-primary-foreground"
                   : "border-primary/20 bg-card"
@@ -182,9 +158,9 @@ export function ServicesOverview() {
                 {item.cta}
                 <ArrowRight size={16} />
               </Link>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

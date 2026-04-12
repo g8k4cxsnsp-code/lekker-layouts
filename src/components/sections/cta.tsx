@@ -1,11 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 export function CTASection() {
   return (
@@ -16,36 +14,19 @@ export function CTASection() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <motion.div variants={fadeInUp}>
-            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-primary/20">
-              <Sparkles size={28} className="text-primary" />
-            </div>
-          </motion.div>
-          <motion.h2
-            variants={fadeInUp}
-            className="font-heading text-3xl font-bold tracking-tight text-background sm:text-4xl lg:text-5xl"
-          >
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-primary/20">
+            <Sparkles size={28} className="text-primary" />
+          </div>
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-background sm:text-4xl lg:text-5xl">
             Ready to Grow Your Business?
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="mt-6 text-lg leading-relaxed text-background/70"
-          >
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-background/70">
             Join South African entrepreneurs who are building their networks,
             sharing their stories, and growing their brands on Lekker Layouts.
             It&apos;s completely free to get started.
-          </motion.p>
-          <motion.div
-            variants={fadeInUp}
-            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-          >
+          </p>
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/register"
               className={cn(
@@ -65,8 +46,8 @@ export function CTASection() {
             >
               Browse Products
             </Link>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { ArrowRight, Clock, ShoppingBag, Target, Sparkles, Zap } from "lucide-react";
 import { Navbar } from "@/components/ui/navbar";
 import { Footer } from "@/components/ui/footer";
@@ -11,7 +10,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { products } from "@/data/products";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
 
 export default function ProductsPage() {
   const activeProducts = products.filter((p) => p.isActive);
@@ -27,32 +25,19 @@ export default function ProductsPage() {
             <div className="absolute -left-40 bottom-0 h-[300px] w-[300px] rounded-full bg-accent/[0.05] blur-[100px]" />
           </div>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-              className="text-center"
-            >
-              <motion.div variants={fadeIn}>
-                <Badge variant="outline" className="mb-4 gap-1.5">
-                  <ShoppingBag size={12} />
-                  Digital Products
-                </Badge>
-              </motion.div>
-              <motion.h1
-                variants={fadeInUp}
-                className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-              >
+            <div className="animate-fade-in-up text-center">
+              <Badge variant="outline" className="mb-4 gap-1.5">
+                <ShoppingBag size={12} />
+                Digital Products
+              </Badge>
+              <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
                 Personalised Digital Products
-              </motion.h1>
-              <motion.p
-                variants={fadeInUp}
-                className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
-              >
+              </h1>
+              <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
                 Tell us about your business, and we&apos;ll create tailored
                 resources just for you — delivered to your inbox within minutes.
-              </motion.p>
-              <motion.div variants={fadeIn} className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
+              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
                     <Target size={14} className="text-primary" />
@@ -71,28 +56,20 @@ export default function ProductsPage() {
                   </div>
                   AI-Powered
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Products Grid */}
         <section className="py-16">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-            >
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {activeProducts.map((product) => (
-                <motion.div
+                <div
                   key={product.id}
-                  variants={fadeInUp}
-                  whileHover={{ y: -4 }}
                   className={cn(
-                    "group overflow-hidden rounded-2xl border-2 bg-card transition-all hover:shadow-lg",
+                    "group overflow-hidden rounded-2xl border-2 bg-card transition-all hover:shadow-lg card-hover",
                     product.isBundle
                       ? "border-primary/30 hover:border-primary/50 ring-1 ring-primary/10"
                       : "border-primary/20 hover:border-primary/30"
@@ -175,36 +152,24 @@ export default function ProductsPage() {
                       </Link>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* CTA */}
         <section className="relative overflow-hidden bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <motion.h2
-                variants={fadeInUp}
-                className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-              >
+            <div className="text-center">
+              <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                 Need a Full Custom Website?
-              </motion.h2>
-              <motion.p
-                variants={fadeInUp}
-                className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
-              >
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
                 Love your personalised blueprint and copy? Let us build the
                 actual website for you — hand-coded and ready to launch.
-              </motion.p>
-              <motion.div variants={fadeIn} className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link
                   href="/templates"
                   className={cn(buttonVariants({ size: "lg" }), "gap-2 glow-primary")}
@@ -218,8 +183,8 @@ export default function ProductsPage() {
                 >
                   Contact Us
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
       </main>

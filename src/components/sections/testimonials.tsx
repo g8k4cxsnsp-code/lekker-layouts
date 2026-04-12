@@ -1,9 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Quote, Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { fadeIn, fadeInUp, scaleIn, staggerContainer } from "@/lib/animations";
 
 const testimonials = [
   {
@@ -36,45 +34,23 @@ export function Testimonials() {
   return (
     <section className="relative overflow-hidden bg-muted/30 py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center"
-        >
-          <motion.div variants={fadeIn}>
-            <Badge variant="outline" className="mb-4">
-              Community
-            </Badge>
-          </motion.div>
-          <motion.h2
-            variants={fadeInUp}
-            className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
-          >
+        <div className="text-center">
+          <Badge variant="outline" className="mb-4">
+            Community
+          </Badge>
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             What Business Owners Say
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground"
-          >
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
             Real entrepreneurs, real results.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="mt-16 grid gap-8 md:grid-cols-3"
-        >
+        <div className="mt-16 grid gap-8 md:grid-cols-3">
           {testimonials.map((t) => (
-            <motion.div
+            <div
               key={t.name}
-              variants={fadeInUp}
-              whileHover={{ y: -4 }}
-              className="relative rounded-2xl border border-border/60 bg-card p-7 transition-shadow hover:shadow-md"
+              className="relative rounded-2xl border border-border/60 bg-card p-7 transition-shadow hover:shadow-md card-hover"
             >
               <Quote
                 size={40}
@@ -83,16 +59,11 @@ export function Testimonials() {
 
               <div className="mb-4 flex gap-1">
                 {Array.from({ length: t.rating }).map((_, i) => (
-                  <motion.div
+                  <Star
                     key={i}
-                    variants={scaleIn}
-                    transition={{ delay: i * 0.1 }}
-                  >
-                    <Star
-                      size={16}
-                      className="fill-amber-400 text-amber-400"
-                    />
-                  </motion.div>
+                    size={16}
+                    className="fill-amber-400 text-amber-400"
+                  />
                 ))}
               </div>
 
@@ -111,9 +82,9 @@ export function Testimonials() {
                   <p className="text-xs text-muted-foreground">{t.business}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

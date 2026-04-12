@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Navbar } from "@/components/ui/navbar";
 import { Footer } from "@/components/ui/footer";
@@ -12,7 +11,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { templates, categories } from "@/data/templates";
-import { fadeIn, fadeInUp, staggerContainer } from "@/lib/animations";
 
 interface TemplatesAuthenticatedProps {
   profile: {
@@ -39,48 +37,29 @@ export function TemplatesAuthenticated({ profile }: TemplatesAuthenticatedProps)
         {/* Hero */}
         <section className="bg-muted/30 py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-              className="text-center"
-            >
-              <motion.div variants={fadeIn}>
-                <Badge variant="outline" className="mb-4">
-                  Templates
-                </Badge>
-              </motion.div>
-              <motion.h1
-                variants={fadeInUp}
-                className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-              >
+            <div className="animate-fade-in-up text-center">
+              <Badge variant="outline" className="mb-4">
+                Templates
+              </Badge>
+              <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
                 Templates for {businessName}
-              </motion.h1>
-              <motion.p
-                variants={fadeInUp}
-                className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
-              >
+              </h1>
+              <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
                 Pick a template and we&apos;ll brand it for your{" "}
                 {profile.industry ? profile.industry.toLowerCase() : ""} business.
                 You&apos;ll be live in days.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* Category Filters */}
         <section className="border-b border-border bg-background py-6">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-              className="flex flex-wrap items-center justify-center gap-2"
-            >
+            <div className="flex flex-wrap items-center justify-center gap-2">
               {categories.map((category) => (
-                <motion.button
+                <button
                   key={category}
-                  variants={fadeIn}
                   onClick={() => setActiveCategory(category)}
                   className={cn(
                     "rounded-full px-4 py-2 text-sm font-medium transition-colors",
@@ -90,27 +69,20 @@ export function TemplatesAuthenticated({ profile }: TemplatesAuthenticatedProps)
                   )}
                 >
                   {category}
-                </motion.button>
+                </button>
               ))}
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* Template Grid */}
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-            >
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {filtered.map((template) => (
-                <motion.div
+                <div
                   key={template.id}
-                  variants={fadeInUp}
-                  className="group relative overflow-hidden rounded-2xl border-2 border-primary/20 bg-card transition-all hover:border-primary/40 hover:shadow-lg"
+                  className="group relative overflow-hidden rounded-2xl border-2 border-primary/20 bg-card transition-all hover:border-primary/40 hover:shadow-lg card-hover"
                 >
                   {/* Live Preview Thumbnail */}
                   <div className="relative aspect-[16/10] overflow-hidden bg-muted">
@@ -164,9 +136,9 @@ export function TemplatesAuthenticated({ profile }: TemplatesAuthenticatedProps)
                       <ArrowRight size={16} />
                     </Link>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
 
             {filtered.length === 0 && (
               <div className="py-16 text-center">
