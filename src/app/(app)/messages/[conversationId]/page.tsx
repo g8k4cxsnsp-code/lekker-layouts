@@ -30,7 +30,7 @@ export default async function ConversationPage({
     await Promise.all([
       supabase
         .from("conversations")
-        .select("id, created_at, is_group, group_name")
+        .select("id, created_at, type, name")
         .eq("id", conversationId)
         .single(),
       supabase

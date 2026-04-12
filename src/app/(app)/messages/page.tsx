@@ -22,7 +22,7 @@ export default async function MessagesPage() {
       .select(`
         conversation_id,
         last_read_at,
-        conversations (
+        conversations:conversation_id (
           id,
           type,
           name,
