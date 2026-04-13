@@ -234,7 +234,7 @@ create policy "Authenticated users can create conversations" on public.conversat
 
 -- Conversation members
 alter table public.conversation_members enable row level security;
-create policy "Members can see membership" on public.conversation_members for select using (conversation_id in (select conversation_id from public.conversation_members cm where cm.user_id = auth.uid()));
+create policy "Members can see membership" on public.conversation_members for select using (auth.uid() = user_id);
 create policy "Authenticated users can add members" on public.conversation_members for insert with check (true);
 create policy "Members can update their own read status" on public.conversation_members for update using (auth.uid() = user_id);
 
